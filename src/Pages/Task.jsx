@@ -1,22 +1,19 @@
 import React from "react";
-
 import Header from "../Components/Header";
 import Menu from "../Components/Menu";
-import Dashboard from "../Components/Dashboard";
 import { FaUser, FaLock } from "react-icons/fa";
 // import Logo from "./Images/Logo.PNG";
 
-function AdminDashboard() {
+function Task() {
   return (
-    <div className="h-screen  ">
+    <div className="h-screen ">
       <Header />
 
       <div className="flex ">
         <Menu />
-        <Dashboard />
       </div>
     </div>
   );
 }
 
-export default AdminDashboard;
+export default Task;

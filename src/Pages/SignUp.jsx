@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
-
 // import { useHistory } from "react-router-dom";
 
 import signupImage from "./Images/SignUp.jpg";
@@ -22,7 +21,7 @@ function SignUp() {
   };
 
   return (
-    <div className="bg-[grey] flex h-screen">
+    <div className=" flex ">
       <div className="w-1/2 bg-[#4BCBEB]">
         <img
           className="w-full h-100 object-cover"
