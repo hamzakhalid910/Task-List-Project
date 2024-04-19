@@ -8,23 +8,28 @@ import AdminDashboard from "./Pages/AdminDashboard";
 import Users from "./Pages/Users";
 import Task from "./Pages/Task";
 import Setting from "./Pages/Setting";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./Components/Header";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<SignUp />} />
-        <Route path="/login" element={<SignIn />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/resetpassword" element={<ResetPassword />} />
-        <Route path="/dashboard" element={<AdminDashboard />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/task" element={<Task />} />
-        <Route path="/setting" element={<Setting />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<SignUp />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
+
+          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/task" element={<Task />} />
+          <Route path="/setting" element={<Setting />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

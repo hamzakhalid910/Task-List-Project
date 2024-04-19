@@ -4,7 +4,7 @@ import React from "react";
 function Header() {
   return (
     <div className="flex justify-center items-center ">
-      <div className="h-20 w-[28%] border-2 rounded-md flex py-4 px-2">
+      <div className="h-16 w-[28%] border-2  flex py-1.5 px-2">
         <img
           className="object-contain h-12 w-12"
           src="src\Pages\Images\Logo.png"
@@ -15,7 +15,7 @@ function Header() {
         </h1>
       </div>
 
-      <div className="h-20 py-4 w-[72%] bg-white-100 border-2 rounded-md content-center">
+      <div className="h-16 py-4 w-[72%] bg-white-100 border-2 content-center">
         <h2 className="font-bold text-left px-3">Dashboard</h2>
       </div>
     </div>
