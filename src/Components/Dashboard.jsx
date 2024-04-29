@@ -5,7 +5,7 @@ import Chart from "./Chart";
 
 function Dashboard() {
   return (
-    <div className="w-[72%] h-screen bg-gray-200 px-4 py-2">
+    <div className="w-[72%] h-screen bg-gray-100 px-4 py-2">
       <div className="rounded-sm bg-white h-[96%]">
         <h2 className="font-bold text-left p-2 ml-4 ">Analytics</h2>
         <div className="grid grid-cols-4 p-4 space-x-2 text-sm">

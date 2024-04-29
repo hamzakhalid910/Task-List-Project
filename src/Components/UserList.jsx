@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const Users = [
   {
@@ -53,28 +53,35 @@ const Users = [
 ];
 
 function UserList() {
-  const arrayDataItems = Users.map((User) => (
-    <li key={Users.CustomerName}>
-      <p>{Users.ProjectName}</p>
-      <p>{Users.TaskStartDate}</p>
-    </li>
-  ));
   return (
-    <div className="grid grid-cols-5 space-x-4 ">
-      <div className=" border-2">
-        <h1 className="py-2 font-bold">Customer Name</h1>
+    <div className="w-[72%] bg-grey-100">
+      <div className="flex w-[100%] font-bold text-left">
+        <div className="flex-grow py-2 items-center px-1">Customer Name</div>
+        <div className="flex-grow py-2 items-center ">Project Name</div>
+        <div className="flex-grow py-2 items-center">Task Start Date</div>
+        <div className="flex-grow py-2 items-center">Task End Date</div>
+        <div className="flex-grow py-2 item-center">OverDue Day</div>
       </div>
-      <div className="border-2">
-        <h1>Project Name</h1>
-      </div>
-      <div>
-        <h1>Task Start Date</h1>
-      </div>
-      <div>
-        <h1>Task End Date</h1>
-      </div>
-      <div>
-        <h1>OverDue Day</h1>
+      <div className="bg-green w-[100%] ">
+        {Users.map((user, index) => (
+          <div key={index} className="flex w-[100%]">
+            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+              {user.CustomerName}
+            </div>
+            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+              {user.ProjectName}
+            </div>
+            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+              {user.TaskStartDate}
+            </div>
+            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+              {user.TaskEndDate}
+            </div>
+            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+              {user.OverdueDay}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

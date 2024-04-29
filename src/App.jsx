@@ -9,7 +9,7 @@ import Users from "./Pages/Users";
 import Task from "./Pages/Task";
 import Setting from "./Pages/Setting";
 import ProgressBar from "@ramonak/react-progress-bar";
-
+import Notifications from "./Pages/Notifications";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header";
 
@@ -27,6 +27,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/task" element={<Task />} />
           <Route path="/setting" element={<Setting />} />
+          <Route path="/notifications" element={<Notifications />} />
         </Routes>
       </Router>
     </>

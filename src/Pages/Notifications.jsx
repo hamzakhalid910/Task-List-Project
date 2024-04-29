@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import Header from "../Components/Header";
 import Menu from "../Components/Menu";
-import UserList from "../Components/UserList";
+import NotificationsList from "../Components/NotificationsList";
 import { FaUser, FaLock } from "react-icons/fa";
 
-function Users() {
+function Notifications() {
   return (
     <div className="h-[96%]  ">
       <Header />
 
       <div className="flex ">
         <Menu />
-        <UserList />
+        <NotificationsList />
       </div>
     </div>
   );
 }
 
-export default Users;
+export default Notifications;
