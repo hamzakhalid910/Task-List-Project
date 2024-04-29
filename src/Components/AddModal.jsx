@@ -10,7 +10,7 @@ function AddModal({ onSubmit }) {
     {
       title: "",
       description: "",
-      attachemnt: "",
+      attachment: "",
       startDate: "",
       endDate: "",
     },
@@ -31,12 +31,10 @@ function AddModal({ onSubmit }) {
   return (
     <>
       {cross && (
-        <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg">
-            <div className="flex">
-              <h2 className="text-xl font-bold mx-auto mb-4 mt-1 text-center">
-                Add Task
-              </h2>
+        <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-60">
+          <div className="bg-white p-6 rounded-lg border-2 ">
+            <div className="flex ">
+              <h2 className=" text-xl font-bold mx-auto mb-4 mt-1">Add Task</h2>
 
               <button onClick={crossDisplay} className="">
                 <svg
@@ -56,12 +54,19 @@ function AddModal({ onSubmit }) {
               </button>
             </div>
 
-            <p>
-              Fill the information below to add new task as per your requirment.
-            </p>
+            <div className="mt-2 mb-2">
+              <p>
+                Fill the information below to add new task as per your
+                requirment.
+              </p>
+            </div>
+
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
-                <label htmlFor="title" className="block mb-1 font-bold">
+                <label
+                  htmlFor="title"
+                  className="text-left px-2 block mb-1 font-bold"
+                >
                   Enter Title:
                 </label>
                 <input
@@ -73,7 +78,10 @@ function AddModal({ onSubmit }) {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="value2" className="block mb-1 font-bold">
+                <label
+                  htmlFor="value2"
+                  className=" text-left px-2 block mb-1 font-bold"
+                >
                   Description:
                 </label>
                 <input
@@ -84,21 +92,26 @@ function AddModal({ onSubmit }) {
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
               </div>
-              <label htmlFor="value3" className="block mb-1 font-bold">
+              <label
+                htmlFor="value3"
+                className="text-left px-2 block mb-1 font-bold"
+              >
                 Attachment:
               </label>
               <input
                 type="file"
                 name="attachment"
-                value={modalData.attachemnt}
+                value={modalData.attachment}
                 onChange={handleChange}
-                className="w-full h-40 border border-gray-300 rounded-md py-1 px-3"
+                className="content-center items-center w-full h-32 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">
                 <p className="text-xs">Support format PNG, JPEJ</p>
                 <p className="text-xs ml-48">Support format PNG, JPEJ</p>
               </div>
-              <label className="block mb-1 font-bold">Start Date:</label>
+              <label className=" mt-2 text-left px-2 block mb-1 font-bold">
+                Start Date:
+              </label>
               <input
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
@@ -106,7 +119,9 @@ function AddModal({ onSubmit }) {
                 value={modalData.startDate}
                 required
               ></input>
-              <label className="block mb-1 font-bold">End Date:</label>
+              <label className="mt-2 text-left px-2 block mb-1 font-bold">
+                End Date:
+              </label>
               <input
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
@@ -116,7 +131,7 @@ function AddModal({ onSubmit }) {
               ></input>
               <button
                 type="submit"
-                className="bg-blue-500 text-white py-2 px-4 ml-48 mt-2 rounded-md"
+                className="bg-blue-500 text-white py-2 px-4 mt-2 rounded-md"
               >
                 Submit
               </button>

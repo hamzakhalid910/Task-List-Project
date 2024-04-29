@@ -54,34 +54,36 @@ const Users = [
 
 function UserList() {
   return (
-    <div className="w-[72%] bg-grey-100">
-      <div className="flex w-[100%] font-bold text-left">
-        <div className="flex-grow py-2 items-center px-1">Customer Name</div>
-        <div className="flex-grow py-2 items-center ">Project Name</div>
-        <div className="flex-grow py-2 items-center">Task Start Date</div>
-        <div className="flex-grow py-2 items-center">Task End Date</div>
-        <div className="flex-grow py-2 item-center">OverDue Day</div>
-      </div>
-      <div className="bg-green w-[100%] ">
-        {Users.map((user, index) => (
-          <div key={index} className="flex w-[100%]">
-            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
-              {user.CustomerName}
+    <div className="w-[72%] bg-gray-100 p-4 h-screen ">
+      <div className=" bg-white p-2">
+        <div className="flex w-[100%] font-bold text-left">
+          <div className="flex-grow py-2 items-center px-1">Customer Name</div>
+          <div className="flex-grow py-2 items-center ">Project Name</div>
+          <div className="flex-grow py-2 items-center">Task Start Date</div>
+          <div className="flex-grow py-2 items-center">Task End Date</div>
+          <div className="flex-grow py-2 item-center">OverDue Day</div>
+        </div>
+        <div className="bg-green w-[100%] ">
+          {Users.map((user, index) => (
+            <div key={index} className="flex w-[100%]">
+              <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+                {user.CustomerName}
+              </div>
+              <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+                {user.ProjectName}
+              </div>
+              <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+                {user.TaskStartDate}
+              </div>
+              <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+                {user.TaskEndDate}
+              </div>
+              <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
+                {user.OverdueDay}
+              </div>
             </div>
-            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
-              {user.ProjectName}
-            </div>
-            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
-              {user.TaskStartDate}
-            </div>
-            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
-              {user.TaskEndDate}
-            </div>
-            <div className=" flex w-[20%] shadow-md items-center py-2 px-4">
-              {user.OverdueDay}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

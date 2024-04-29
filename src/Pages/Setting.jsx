@@ -7,7 +7,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 function Setting() {
   return (
     <div className="h-screen ">
-      <Header />
+      <Header pageName="Settings" />
 
       <div className="flex ">
         <Menu />
