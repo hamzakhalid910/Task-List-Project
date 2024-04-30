@@ -36,7 +36,6 @@ function Chart() {
     <div className=" h-56 ">
       <div className="mt-2 p-2 h-screen">
         <Line data={data} options={options} />{" "}
-        {/* Place data and options inside curly braces */}
       </div>
     </div>
   );

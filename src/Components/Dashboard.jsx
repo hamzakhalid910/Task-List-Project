@@ -5,8 +5,8 @@ import Chart from "./Chart";
 
 function Dashboard() {
   return (
-    <div className="w-[72%] bg-gray-100 px-4 py-2 h-[96%] ">
-      <div className="rounded bg-white h-[96%] rounded-md">
+    <div className="w-[72%] bg-gray-100 px-4 py-2 h-screen ">
+      <div className=" bg-white h-[96%] rounded-md">
         <h2 className="font-bold text-left p-2 ml-4 ">Analytics</h2>
         <div className="grid grid-cols-4 p-4 space-x-2 text-sm">
           <div className="font-bold border-1 rounded-md bg-gray-100 h-28">

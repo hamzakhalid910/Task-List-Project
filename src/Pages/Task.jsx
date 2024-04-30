@@ -6,9 +6,12 @@ import Menu from "../Components/Menu";
 function Task() {
   const [submittedData, setSubmittedData] = useState([]);
   let [showModal, setShowModal] = useState(false);
-  const [showImage, setShowImage] = useState(false);
 
-  function handleClick() {}
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick1 = () => {
+    setIsOpen(!isOpen);
+  };
 
   function display() {
     setShowModal(!showModal);
@@ -19,15 +22,8 @@ function Task() {
     setShowModal(false);
   }
 
-  function getRandomColor() {
-    const colors = ["red", "yellow", "orange", "pink", "purple"];
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
-  }
-  // console.log(getRandomColor());
-
   return (
-    <div className="h-[96%]">
+    <div className="h-screen">
       <Header pageName="Task"></Header>
       <div className="flex h-[96%]">
         <Menu></Menu>
@@ -93,12 +89,31 @@ function Task() {
                 <div className="p-4 bg-red-500"></div>
                 <div className="flex ">
                   <h4 className="font-bold p-2 ">Title:</h4>
-                  <button className="ml-auto " onClick={handleClick}>
-                    <img
-                      className="h-6"
-                      src="src\Pages\Images\Options.png"
-                    ></img>
-                  </button>
+                  <div className="relative">
+                    <button className="" onClick={handleClick1}>
+                      <img
+                        className="h-6 ml-44 mt-2"
+                        src="src/Pages/Images/Options.png"
+                        alt="Options"
+                      ></img>
+                    </button>
+                    {isOpen && (
+                      <div className="px-2 absolute top-8 right-0 bg-white border border-gray-300 rounded shadow-md">
+                        <ul>
+                          <li className="border-b px-4">
+                            <button onClick={() => console.log("Edit clicked")}>
+                              Edit
+                            </button>
+                          </li>
+                          <li>
+                            <button onClick={() => console.log("Add clicked")}>
+                              Add
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <p className="mt-2 text-left px-2">{data.title}</p>
 
@@ -118,8 +133,8 @@ function Task() {
                   <h8 className="font-bold ml-20">End Date:</h8>
                 </div>
                 <div className="flex">
-                  <p>{data.startDate}</p>
-                  <p>{data.endDate}</p>
+                  <p className="ml-2">{data.startDate}</p>
+                  <p className="ml-20">{data.endDate}</p>
                 </div>
               </div>
             ))}

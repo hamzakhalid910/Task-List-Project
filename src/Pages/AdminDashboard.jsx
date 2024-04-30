@@ -6,8 +6,6 @@ import Dashboard from "../Components/Dashboard";
 import BasicDateCalendar from "../Components/BasicDateCalender";
 import { FaUser, FaLock } from "react-icons/fa";
 
-// import Logo from "./Images/Logo.PNG";
-
 function AdminDashboard() {
   return (
     <div className="h-[96%]  ">

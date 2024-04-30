@@ -1,6 +1,4 @@
 import React from "react";
-// import Header from "../General Components/Header";
-// import MenuComponent from "../General Components/MenuComponent";
 
 import Header from "./Header";
 import Menu from "./Menu";

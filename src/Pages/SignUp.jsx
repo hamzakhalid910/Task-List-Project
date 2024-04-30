@@ -14,16 +14,12 @@ function SignUp() {
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/2 bg-[#4BCBEB]">
-        <img
-          className="w-full h-100 object-cover"
-          src={signupImage}
-          alt="User Image"
-        />
+    <div className=" flex h-full">
+      <div className="w-1/2 h-full bg-[#4BCBEB]">
+        <img className="h-100 " src={signupImage} alt="User Image" />
       </div>
 
-      <div className="w-1/2 bg-white text-center">
+      <div className="w-1/2  text-center">
         <h1 className="text-2xl mt-20">Sign Up for an Account</h1>
 
         <form className="mt-10 box-border space-y-4" onSubmit={handleSignup}>

@@ -116,6 +116,7 @@ function AddModal({ onSubmit }) {
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="startDate"
+                onChange={handleChange}
                 value={modalData.startDate}
                 required
               ></input>
@@ -126,6 +127,7 @@ function AddModal({ onSubmit }) {
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="endDate"
+                onChange={handleChange}
                 value={modalData.endDate}
                 required
               ></input>
