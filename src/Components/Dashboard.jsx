@@ -5,11 +5,11 @@ import Chart from "./Chart";
 
 function Dashboard() {
   return (
-    <div className="w-[72%] bg-gray-100 px-4 py-2 h-screen ">
-      <div className=" bg-white h-[96%] rounded-md">
+    <div className="w-[72%]sm:100 md:50 bg-gray-100 px-4 py-2 h-screen ">
+      <div className="flex-wrap bg-white h-[96%] sm:100 md:50 rounded-md">
         <h2 className="font-bold text-left p-2 ml-4 ">Analytics</h2>
-        <div className="grid grid-cols-4 p-4 space-x-2 text-sm">
-          <div className="font-bold border-1 rounded-md bg-gray-100 h-28">
+        <div className="grid grid-cols-4 p-4 space-x-2 text-sm sm:100 md:50">
+          <div className="font-bold border-1 rounded-md bg-gray-100 h-28 sm:100 md:50">
             <h1 className="mt-2 px-4 text-left ">Total Task</h1>
             <h2 className="mt-2 text-left px-4 h-10 text-xl text-gray-600">
               90/100
