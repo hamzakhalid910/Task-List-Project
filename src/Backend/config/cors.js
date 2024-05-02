@@ -1,11 +1,11 @@
 // config/cors.js
-const cors = require("cors");
+import cors from "cors";
 
 // Define whitelist of allowed origins
 const whitelist = ["http://localhost:3000", "*"];
 
 // Configure CORS options
-const corsOptions = {
+export const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
@@ -15,4 +15,5 @@ const corsOptions = {
   },
 };
 
-module.exports = cors(corsOptions);
+// Use corsOptions directly without default export
+export default cors(corsOptions);
