@@ -1,7 +1,8 @@
-const express = require("express");
-// const mongoose = require("mongoose");
-const connectDB = require("./config/db");
-const corsMiddleware = require("./config/cors");
+import express from "express";
+// import mongoose from "mongoose";
+import connectDB from "./config/db.js";
+import corsMiddleware from "./config/cors.js";
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -14,9 +15,9 @@ app.use(corsMiddleware);
 app.use(express.json());
 
 // Routes
-const userRoutes = require("./Routes/userRoutes");
-const taskRoutes = require("./Routes/taskRoutes");
-const notificationRoutes = require("./Routes/notificationRoutes");
+import userRoutes from "./Routes/userRoutes.js";
+import taskRoutes from "./Routes/taskRoutes.js";
+import notificationRoutes from "./Routes/notificationRoutes.js";
 
 app.use("/api/users", userRoutes);
 app.use("/api/tasks", taskRoutes);
