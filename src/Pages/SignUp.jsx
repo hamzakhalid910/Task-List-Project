@@ -2,15 +2,30 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import signupImage from "./Images/SignUp.jpg";
+import axios from "axios"; // Import Axios
 
 function SignUp() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log(`Name: ${fullName}, Email: ${email}, Password: ${password}`);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/register",
+        {
+          fullName,
+          email,
+          password,
+        }
+      );
+      console.log("Sign Up success:", response.data);
+      // Handle success response
+    } catch (error) {
+      console.error("Sign Up error:", error.response.data);
+      // Handle error response
+    }
   };
 
   return (
