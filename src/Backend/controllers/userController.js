@@ -1,4 +1,18 @@
 import User from "../model/userModel.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+// Get all users
+export const createUser = async (req, res) => {
+  const user = new User(req.body);
+  try {
+    const newUser = await user.save();
+    const token = newUser.createJWT();
+    res.status(201).json({ newUser, token });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 // Get all users
 export const getAllUsers = async (req, res) => {
@@ -21,18 +35,6 @@ export const getUserById = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
-  }
-};
-
-// Create a new user
-export const createUser = async (req, res) => {
-  const user = new User(req.body);
-
-  try {
-    const newUser = await user.save();
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
   }
 };
 
