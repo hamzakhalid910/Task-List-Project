@@ -12,13 +12,19 @@ function SignIn() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/api/users/login", { email, password })
-      .then((result) => {
-        navigate("/dashboard");
-        console.log(result);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/login",
+        {
+          email,
+          password,
+        }
+      );
+      console.log(response.data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Login error:", error.message);
+    }
   };
 
   return (
