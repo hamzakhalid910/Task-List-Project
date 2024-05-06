@@ -1,31 +1,40 @@
-import { useState, React } from "react";
+import { useState } from "react";
+import axios from "axios"; // Import Axios
 
-function AddModal({ onSubmit }) {
-  const [data, setData] = useState();
-  const [cross, setCross] = useState(true);
-  function crossDisplay() {
-    setCross(!cross);
-  }
-  const modalData = [
-    {
-      title: "",
-      description: "",
-      attachment: "",
-      startDate: "",
-      endDate: "",
-    },
-  ];
-  function handleChange(e) {
+function AddModal({ onClose }) {
+  const [cross, setCross] = useState(true); // Define the cross state variable
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    attachment: "",
+    startDate: "",
+    endDate: "",
+  });
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
     }));
-  }
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  };
 
-    onSubmit(data);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/tasks/addtask",
+        formData
+      );
+      console.log("Task added successfully:", response.data);
+      onClose(); // Close the modal after successful submission
+    } catch (error) {
+      console.error("Error adding task:", error.response.data);
+    }
+  };
+
+  const crossDisplay = () => {
+    setCross(!cross);
   };
 
   return (
@@ -63,7 +72,7 @@ function AddModal({ onSubmit }) {
               </p>
             </div>
 
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   htmlFor="title"
@@ -75,7 +84,7 @@ function AddModal({ onSubmit }) {
                   type="text"
                   name="title"
                   placeholder="Enter Full Title"
-                  value={modalData.title}
+                  value={formData.title}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
@@ -94,7 +103,7 @@ function AddModal({ onSubmit }) {
                   type="text"
                   name="description"
                   placeholder="Enter description text"
-                  value={modalData.description}
+                  value={formData.description}
                   onChange={handleChange}
                   className="w-full h-24 border border-gray-300 rounded-md py-1 px-3"
                 />
@@ -108,9 +117,9 @@ function AddModal({ onSubmit }) {
               <input
                 type="file"
                 name="attachment"
-                value={modalData.attachment}
+                value={formData.attachment}
                 onChange={handleChange}
-                className="h-screen content-center ml-18 w-full h-24 border border-gray-300 rounded-md py-1 px-3"
+                className="content-center ml-18 w-full h-24 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">
                 <p className="text-xs text-gray-400">
@@ -128,7 +137,7 @@ function AddModal({ onSubmit }) {
                 type="date"
                 name="startDate"
                 onChange={handleChange}
-                value={modalData.startDate}
+                value={formData.startDate}
                 required
               ></input>
               <label className="mt-2 text-left px-2 block mb-1 font-semibold">
@@ -139,9 +148,10 @@ function AddModal({ onSubmit }) {
                 type="date"
                 name="endDate"
                 onChange={handleChange}
-                value={modalData.endDate}
+                value={formData.endDate}
                 required
               ></input>
+
               <button
                 type="submit"
                 className="bg-[#4BCBEB] font-bold px-36 text-white py-2 px-4 mt-4 rounded-md"
@@ -155,4 +165,5 @@ function AddModal({ onSubmit }) {
     </>
   );
 }
+
 export default AddModal;
