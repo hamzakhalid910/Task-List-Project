@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios"; // Import Axios
 
-function AddModal({ onClose }) {
+function AddModal({ onSubmit }) {
   const [cross, setCross] = useState(true); // Define the cross state variable
   const [formData, setFormData] = useState({
     title: "",
@@ -27,9 +27,12 @@ function AddModal({ onClose }) {
         formData
       );
       console.log("Task added successfully:", response.data);
-      onClose(); // Close the modal after successful submission
+      onSubmit(formData); // Pass the form data to handleModalSubmit
     } catch (error) {
-      console.error("Error adding task:", error.response.data);
+      console.error(
+        "Error adding task:",
+        error.response?.data || error.message
+      );
     }
   };
 
@@ -119,7 +122,7 @@ function AddModal({ onClose }) {
                 name="attachment"
                 value={formData.attachment}
                 onChange={handleChange}
-                className="content-center ml-18 w-full h-24 border border-gray-300 rounded-md py-1 px-3"
+                className="content-center ml-18 w-full h-14 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">
                 <p className="text-xs text-gray-400">
