@@ -29,6 +29,8 @@ export const createTask = async (req, res) => {
   const task = new Task({
     title: req.body.title,
     description: req.body.description,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
     // Add other task properties here
   });
 
