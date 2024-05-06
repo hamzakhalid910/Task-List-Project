@@ -2,10 +2,24 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import signInImage from "./Images/SignIn.jpg";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3000/api/users/login", { email, password })
+      .then((result) => {
+        navigate("/dashboard");
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
@@ -26,7 +40,7 @@ function SignIn() {
             Welcome back! please enter your detail
           </p>
 
-          <form className="mt-10 text-center space-y-2">
+          <form className="mt-10 text-center space-y-2" onSubmit={handleLogin}>
             <div className="flex justify-center items-center">
               <label className="relative flex imtems-center">
                 <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
@@ -73,7 +87,10 @@ function SignIn() {
             <br />
 
             <a href="/dashboard">
-              <button className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-96 text-white font-bold py-3 text-lg">
+              <button
+                className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-96 text-white font-bold py-3 text-lg"
+                type="submit"
+              >
                 Sign In
               </button>
             </a>

@@ -1,31 +1,34 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import signupImage from "./Images/SignUp.jpg";
-import axios from "axios"; // Import Axios
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignUp() {
-  const [fullName, setFullName] = useState("");
+  const [fullname, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3000/api/users/register",
-    //     {
-    //       fullName,
-    //       email,
-    //       password,
-    //     }
-    //   );
-    //   console.log("Sign Up success:", response.data);
-    //   // Handle success response
-    // } catch (error) {
-    //   console.error("Sign Up error:", error.response.data);
-    //   // Handle error response
-    // }
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/register",
+        {
+          fullname,
+          email,
+          password,
+        }
+      );
+      navigate("/login");
+      console.log("Sign Up success:", response.data);
+      // Handle success response
+    } catch (error) {
+      console.error("Sign Up error:", error.response.data);
+      // Handle error response
+    }
   };
 
   return (
@@ -51,7 +54,8 @@ function SignUp() {
                   className="p-2 pl-10 border-2 border-grey rounded-md w-96"
                   type="text"
                   placeholder="Enter your Full Name"
-                  value={fullName}
+                  value={fullname}
+                  name="fullname"
                   onChange={(e) => setFullName(e.target.value)}
                   required
                 />
@@ -68,6 +72,7 @@ function SignUp() {
                   type="email"
                   placeholder="Email"
                   value={email}
+                  name="email"
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
@@ -84,6 +89,7 @@ function SignUp() {
                   type="password"
                   placeholder="Password"
                   value={password}
+                  name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
@@ -114,11 +120,12 @@ function SignUp() {
             </div>
             <br />
 
-            <Link to="/login">
-              <button className="w-96 mt-2 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 text-white font-bold py-3 text-lg">
-                Sign Up
-              </button>
-            </Link>
+            <button
+              className="w-96 mt-2 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 text-white font-bold py-3 text-lg"
+              type="submit"
+            >
+              Sign Up
+            </button>
           </form>
           <br />
           <span className=""> Already have an account?</span>

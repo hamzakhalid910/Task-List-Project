@@ -1,7 +1,8 @@
 import express from "express";
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 import connectDB from "./config/DB.js";
-// import corsMiddleware from "./config/Cors.js";
+import cors from 'cors'
+import corsMiddleware from "./config/Cors.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,9 +13,10 @@ connectDB();
 // Middleware
 // Apply CORS middleware
 // app.use(corsMiddleware);
+
+app.use(cors())
 app.use(express.json());
-
-
+console.log('hell0')
 
 
 // Routes
