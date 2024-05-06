@@ -50,6 +50,34 @@ const Users = [
     TaskEndDate: "09-03-2024",
     OverdueDay: "3 Day's",
   },
+  {
+    CustomerName: "Nasar Haroon",
+    ProjectName: "Lorem ipsum",
+    TaskStartDate: "Ross Gellar",
+    TaskEndDate: "09-03-2024",
+    OverdueDay: "3 Day's",
+  },
+  {
+    CustomerName: "Ali Hammad",
+    ProjectName: "Lorem ipsum",
+    TaskStartDate: "Ross Gellar",
+    TaskEndDate: "09-03-2024",
+    OverdueDay: "3 Day's",
+  },
+  {
+    CustomerName: "Umer Hamza",
+    ProjectName: "Lorem ipsum",
+    TaskStartDate: "Ross Gellar",
+    TaskEndDate: "09-03-2024",
+    OverdueDay: "3 Day's",
+  },
+  {
+    CustomerName: "Ali Haroon",
+    ProjectName: "Lorem ipsum",
+    TaskStartDate: "Ross Gellar",
+    TaskEndDate: "09-03-2024",
+    OverdueDay: "3 Day's",
+  },
 ];
 
 function UserList() {

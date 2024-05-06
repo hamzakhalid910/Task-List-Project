@@ -3,6 +3,7 @@ import React from "react";
 export function TaskIcon() {
   return (
     <svg
+      className="text-red-500"
       width="22"
       height="22"
       viewBox="0 0 22 22"

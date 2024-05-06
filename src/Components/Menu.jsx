@@ -37,7 +37,7 @@ function Menu() {
           <div className="mr-1">
             <UserIcon />
           </div>
-          <span className="hidden sm:inline-block">Users</span>
+          <span className="hidden sm:inline-block ">Users</span>
         </button>
       </Link>
       <Link to="/Task">
