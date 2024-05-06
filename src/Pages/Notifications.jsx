@@ -7,7 +7,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 function Notifications() {
   return (
     <div className="h-[96%]  ">
-      <Header />
+      <Header pageName="Notifications" />
 
       <div className="flex ">
         <Menu />

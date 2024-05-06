@@ -2,7 +2,7 @@ import React from "react";
 
 const MenuIcon = () => {
   return (
-    <div className="color-red">
+    <div>
       <svg
         width="18"
         height="18"

@@ -32,9 +32,11 @@ function AddModal({ onSubmit }) {
     <>
       {cross && (
         <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-60">
-          <div className="bg-white p-6 rounded-lg border-2 ">
+          <div className="bg-white p-6 rounded-xl border-2 h-[92%]">
             <div className="flex ">
-              <h2 className=" text-xl font-bold mx-auto mb-4 mt-1">Add Task</h2>
+              <h2 className=" text-lg font-semibold mx-auto mb-2 mt-1">
+                Add Task
+              </h2>
 
               <button onClick={crossDisplay} className="">
                 <svg
@@ -55,7 +57,7 @@ function AddModal({ onSubmit }) {
             </div>
 
             <div className="mt-2 mb-2">
-              <p>
+              <p className="px-2">
                 Fill the information below to add new task as per your
                 requirment.
               </p>
@@ -65,36 +67,41 @@ function AddModal({ onSubmit }) {
               <div className="mb-4">
                 <label
                   htmlFor="title"
-                  className="text-left px-2 block mb-1 font-bold"
+                  className="text-left px-2 block mb-1 font-semibold"
                 >
                   Enter Title:
                 </label>
                 <input
                   type="text"
                   name="title"
+                  placeholder="Enter Full Title"
                   value={modalData.title}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-2">
                 <label
                   htmlFor="value2"
-                  className=" text-left px-2 block mb-1 font-bold"
+                  className=" text-left px-2 block mb-1 font-semibold"
                 >
-                  Description:
+                  Description:{" "}
+                  <span className="text-xs text-gray-400 font-normal">
+                    (up to 255 characters)
+                  </span>
                 </label>
-                <input
+                <textarea
                   type="text"
                   name="description"
+                  placeholder="Enter description text"
                   value={modalData.description}
                   onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-md py-1 px-3"
+                  className="w-full h-24 border border-gray-300 rounded-md py-1 px-3"
                 />
               </div>
               <label
                 htmlFor="value3"
-                className="text-left px-2 block mb-1 font-bold"
+                className="text-left px-2 block mb-1 font-semibold"
               >
                 Attachment:
               </label>
@@ -103,13 +110,17 @@ function AddModal({ onSubmit }) {
                 name="attachment"
                 value={modalData.attachment}
                 onChange={handleChange}
-                className="content-center items-center w-full h-32 border border-gray-300 rounded-md py-1 px-3"
+                className="h-screen content-center ml-18 w-full h-24 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">
-                <p className="text-xs">Support format PNG, JPEJ</p>
-                <p className="text-xs ml-48">Support format PNG, JPEJ</p>
+                <p className="text-xs text-gray-400">
+                  Support format PNG, JPEJ
+                </p>
+                <p className="text-xs ml-48 text-gray-400">
+                  Support format PNG, JPEJ
+                </p>
               </div>
-              <label className=" mt-2 text-left px-2 block mb-1 font-bold">
+              <label className=" mt-2 text-left px-2 block mb-1 font-semibold">
                 Start Date:
               </label>
               <input
@@ -120,7 +131,7 @@ function AddModal({ onSubmit }) {
                 value={modalData.startDate}
                 required
               ></input>
-              <label className="mt-2 text-left px-2 block mb-1 font-bold">
+              <label className="mt-2 text-left px-2 block mb-1 font-semibold">
                 End Date:
               </label>
               <input
@@ -133,9 +144,9 @@ function AddModal({ onSubmit }) {
               ></input>
               <button
                 type="submit"
-                className="bg-blue-500 text-white py-2 px-4 mt-2 rounded-md"
+                className="bg-[#4BCBEB] font-bold px-36 text-white py-2 px-4 mt-4 rounded-md"
               >
-                Submit
+                Add
               </button>
             </form>
           </div>

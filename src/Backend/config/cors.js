@@ -1,7 +1,7 @@
 import cors from "cors";
 
 // Define whitelist of allowed origins
-const whitelist = ["http://localhost:5173", "http://localhost:3000", "*"];
+const whitelist = [ "http://localhost:5173","http://localhost:3000", "*"];
 
 // Configure CORS options
 export const corsOptions = {

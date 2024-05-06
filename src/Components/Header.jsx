@@ -14,8 +14,8 @@ function Header({ pageName }) {
         </h1>
       </div>
 
-      <div className=" border-b flex h-16 py-4 w-[50%] content-center">
-        <h2 className="font-bold text-left px-3">{pageName}</h2>
+      <div className=" border-l-2 border-gray-100 flex h-16 py-4 w-[50%] content-center">
+        <h2 className="font-bold text-left px-2 text-lg">{pageName}</h2>
       </div>
 
       <div className="flex py-4 h-16 border-b w-[5%] justify-center ">
@@ -26,13 +26,13 @@ function Header({ pageName }) {
 
       <div className="border-b flex h-16 px-4 py-4 w-[17%] justify-start">
         <img
-          className="object-contain h-8 w-8"
+          className="object-contain h-11 w-8"
           src="src\Pages\Images\User.jpg"
           alt="User"
         />
         <div className="">
           <p className="ml-2 font-bold">Hamza Khalid</p>
-          <p className="ml-2 ">Status 200</p>
+          <p className="ml-2 text-gray-500 text-sm text-left">Status-200</p>
         </div>
       </div>
     </div>
