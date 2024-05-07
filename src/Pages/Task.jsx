@@ -9,32 +9,19 @@ function Task() {
   const [submittedData, setSubmittedData] = useState([]);
   let [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const getRandomColor = () => {
-    // List of Tailwind CSS background color classes
-    const colors = [
-      "bg-red-500",
-      "bg-blue-500",
-      "bg-green-500",
-      "bg-yellow-500",
-      // Add more colors as needed
-    ];
-
-    // Generate a random index to select a color from the list
-    const randomIndex = Math.floor(Math.random() * colors.length);
-
-    // Return the randomly selected color class
-    return colors[randomIndex];
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
   };
 
-  const handleClick1 = () => {
-    setIsOpen(!isOpen);
-  };
+  // Function to filter tasks based on search query
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  function display() {
-    setShowModal(!showModal);
-  }
-
+  // Function to format date string
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.getFullYear()}-${(date.getMonth() + 1)
@@ -74,7 +61,10 @@ function Task() {
               </h2>
             </div>
             <div className="flex w-[30%] ">
-              <button className="mx-auto" onClick={display}>
+              <button
+                className="mx-auto"
+                onClick={() => setShowModal(!showModal)}
+              >
                 <img
                   className="object-contain h-12 w-32 ml-18"
                   src="src\Pages\Images\AddTask.png"
@@ -111,6 +101,8 @@ function Task() {
                 className="rounded rounded-l-md rounded-r-none pl-10 w-[34%] h-12 mt-4 p-2"
                 type="search"
                 placeholder="Search"
+                value={searchQuery}
+                onChange={handleSearchChange}
                 required
               />
               <button className="bg-[#4BCBEB] w-[11.5%] rounded-l-none rounded-r-md h-12 mt-4">
@@ -120,18 +112,23 @@ function Task() {
           </div>
 
           <div className="flex flex-wrap justify-between px-8 mt-4 space-x-4">
-            {tasks.map((task, index) => (
+            {filteredTasks.map((task, index) => (
               <div
                 key={index}
                 className="bg-white h-96 mt-6 mx-2 w-[96%] lg:w-[31%] border-2 border-sky-200 rounded-xl"
               >
                 <div className="p-4 bg-orange-400 rounded-t-xl"></div>
                 <div className="flex ">
-                  <h4 className="font-bold p-2">Title: {task.title}</h4>
-                  <div className="relative">
-                    <button className="justify-end" onClick={handleClick1}>
+                  <h4 className="font-bold p-2 w-[90%] text-left">
+                    Title: {task.title}
+                  </h4>
+                  <div className="relative ">
+                    <button
+                      className="justify-end"
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
                       <img
-                        className="h-6 mx-auto justify-end  mt-2"
+                        className=" h-6 mx-auto justify-end  mt-2"
                         src="src/Pages/Images/Options.png"
                         alt="Options"
                       ></img>
@@ -167,11 +164,11 @@ function Task() {
                 </div>
                 <div className="flex">
                   <h7 className="font-bold px-2 ">Start Date:</h7>
-                  <h8 className="font-bold ml-20">End Date:</h8>
+                  <h8 className="font-bold ml-44">End Date:</h8>
                 </div>
                 <div className="flex">
                   <p className="ml-2">{formatDate(task.startDate)}</p>
-                  <p className="ml-20">{formatDate(task.endDate)}</p>
+                  <p className="ml-44">{formatDate(task.endDate)}</p>
                 </div>
               </div>
             ))}
