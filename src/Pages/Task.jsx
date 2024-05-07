@@ -10,16 +10,13 @@ function Task() {
   let [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [startDate, setStartDate] = useState(""); // State for start date
+  const [endDate, setEndDate] = useState(""); // State for end date
 
   // Function to handle search input change
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
-  // Function to filter tasks based on search query
-  const filteredTasks = tasks.filter((task) =>
-    task.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   // Function to format date string
   const formatDate = (dateString) => {
@@ -44,6 +41,20 @@ function Task() {
         console.error("Error fetching tasks:", error);
       });
   }, []);
+
+  // Function to filter tasks based on search query and dates
+  const filteredTasks = tasks.filter((task) => {
+    // Filter by search query
+    const searchMatch =
+      task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      task.description.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    // Filter by start and end dates if provided
+    const startDateMatch = startDate ? new Date(task.startDate) >= new Date(startDate) : true;
+    const endDateMatch = endDate ? new Date(task.endDate) <= new Date(endDate) : true;
+
+    return searchMatch && startDateMatch && endDateMatch;
+  });
 
   return (
     <div className="h-full">
@@ -78,11 +89,15 @@ function Task() {
             <input
               className="ml-8 w-[20%] h-12 rounded-md border-2 p-2"
               type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
               required
             />
             <input
               className="ml-8 w-[20%] h-12 rounded-md border-2 p-2"
               type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
               required
             />
           </div>
