@@ -10,7 +10,7 @@ function ForgotPassword() {
     <div className="flex flex-col md:flex-row h-screen">
       <div className="md:w-1/2 h-full bg-[#4BCBEB]">
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-full object-center"
           src={ForgotPasswordImage}
           alt="User Image"
         />

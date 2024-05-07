@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import ResetPasswordImage from "./Images/ResetPassword.jpg";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <div className="md:w-1/2 h-full bg-[#4BCBEB]">
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-full object-center"
           src={ResetPasswordImage}
           alt="User Image"
         />
@@ -34,12 +44,23 @@ function ResetPassword() {
                 <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
                   className="p-2 pl-10 border-2 border-grey rounded-md w-96"
-                  type="password"
+                  type={showPassword ? "text" : "password"} // Toggle input type based on password visibility state
                   placeholder="Enter Your New Password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                 />
+                {!showPassword ? (
+                  <FaEyeSlash
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    onClick={togglePasswordVisibility}
+                  />
+                ) : (
+                  <FaEye
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    onClick={togglePasswordVisibility}
+                  />
+                )}
               </label>
             </div>
 
@@ -48,12 +69,23 @@ function ResetPassword() {
                 <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
                   className="p-2 pl-10 border-2 border-grey rounded-md w-96"
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm Your New Password"
                   value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   required
                 />
+                {!showConfirmPassword ? (
+                  <FaEyeSlash
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    onClick={toggleConfirmPasswordVisibility}
+                  />
+                ) : (
+                  <FaEye
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    onClick={toggleConfirmPasswordVisibility}
+                  />
+                )}
               </label>
             </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 import signInImage from "./Images/SignIn.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,11 +8,19 @@ import axios from "axios";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to track password visibility
+  const [loading, setLoading] = useState(false); // State to track loading state
+
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.post(
         "http://localhost:3000/api/users/login",
         {
@@ -24,6 +32,8 @@ function SignIn() {
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error.message);
+    } finally {
+      setLoading(false); // Set loading state to false after sign up attempt
     }
   };
 
@@ -31,7 +41,7 @@ function SignIn() {
     <div className="flex flex-col md:flex-row h-screen">
       <div className="md:w-1/2 h-full bg-[#4BCBEB]">
         <img
-          className="h-full w-full object-cover"
+          className="h-full w-full object-center"
           src={signInImage}
           alt="User Image"
         />
@@ -68,12 +78,23 @@ function SignIn() {
                 <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
                   className="p-2 pl-10 border-2 border-grey rounded-md w-96"
-                  type="password"
+                  type={showPassword ? "text" : "password"} // Toggle input type based on password visibility state
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                {!showPassword ? (
+                  <FaEyeSlash
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    onClick={togglePasswordVisibility}
+                  />
+                ) : (
+                  <FaEye
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    onClick={togglePasswordVisibility}
+                  />
+                )}
               </label>
             </div>
 
@@ -96,8 +117,14 @@ function SignIn() {
               <button
                 className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-96 text-white font-bold py-3 text-lg"
                 type="submit"
+                disabled={loading}
               >
-                Sign In
+                {loading && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+                  </div>
+                )}
+                {!loading && "Sign In"}
               </button>
             </a>
           </form>

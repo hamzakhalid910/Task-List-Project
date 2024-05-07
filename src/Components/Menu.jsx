@@ -9,7 +9,7 @@ function Menu() {
   const [active, setActive] = useState("dashboard");
 
   return (
-    <div className="w-[28%] bg-white-100 text-left border-1 p-4 h-screen">
+    <div className="w-[15%] bg-white-100 text-left border-1 p-4 h-screen">
       <ul className="mb-2 font-bold">
         <li className="px-2">MENU</li>
       </ul>
