@@ -113,20 +113,19 @@ function SignIn() {
 
             <br />
 
-            <a href="/dashboard">
-              <button
-                className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-80 sm:w-96 text-white font-bold py-3 text-lg"
-                type="submit"
-                disabled={loading}
-              >
-                {loading && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
-                  </div>
-                )}
-                {!loading && "Sign In"}
-              </button>
-            </a>
+            <button
+              className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-80 sm:w-96 text-white font-bold py-3 text-lg relative"
+              type="submit"
+              disabled={loading}
+              style={{ minHeight: "3rem" }} // Set minimum height to maintain button height
+            >
+              {loading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+                </div>
+              )}
+              {!loading && "Sign In"}
+            </button>
           </form>
           <br />
           <span className="mt-4">Don't have an account?</span>

@@ -159,9 +159,10 @@ function SignUp() {
             <br />
 
             <button
-              className="relative w-80 sm:w-96 mt-2 border-2 rounded-md px-22  bg-[#4BCBEB] hover:bg-sky-700 text-white font-bold py-3 text-lg"
+              className="relative w-80 sm:w-96 mt-2 border-2 rounded-md px-22 bg-[#4BCBEB] hover:bg-sky-700 text-white font-bold py-3 text-lg"
               type="submit"
               disabled={loading} // Disable button when loading
+              style={{ minHeight: "3rem" }} // Set minimum height to maintain button height
             >
               {loading && (
                 <div className="absolute inset-0 flex items-center justify-center">
