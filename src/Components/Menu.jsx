@@ -9,13 +9,13 @@ function Menu() {
   const [active, setActive] = useState("dashboard");
 
   return (
-    <div className="w-[15%] bg-white-100 text-left border-1 p-4 h-screen">
-      <ul className="mb-2 font-bold">
-        <li className="px-2">MENU</li>
+    <div className="w-[15%] bg-white-100 text-left border-1 p-2 lg:p-4 ">
+      <ul className=" mb-2  font-bold">
+        <li className="text-sm lg:text-base lg:px-2 ">MENU</li>
       </ul>
       <Link to="/dashboard">
         <button
-          className={`flex shadow w-[96%] text-left font-bold px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
             active === "dashboard" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("dashboard")}
@@ -29,7 +29,7 @@ function Menu() {
       </Link>
       <Link to="/users">
         <button
-          className={`font-blue flex shadow w-[96%] text-left font-bold px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`font-blue flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
             active === "users" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("users")}
@@ -42,7 +42,7 @@ function Menu() {
       </Link>
       <Link to="/Task">
         <button
-          className={`flex shadow w-[96%] text-left font-bold px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
             active === "task" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("task")}
@@ -55,7 +55,7 @@ function Menu() {
       </Link>
       <Link to="/setting">
         <button
-          className={`flex shadow w-[96%] text-left font-bold px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`flex shadow  w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
             active === "setting" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("setting")}

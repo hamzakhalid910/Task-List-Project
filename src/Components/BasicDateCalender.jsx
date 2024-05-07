@@ -6,8 +6,10 @@ function BasicDateCalendar() {
   const [value, onChange] = useState(new Date());
 
   return (
-    <div>
-      <Calendar className="border-0 " onChange={onChange} value={value} />
+    <div className="justify-right">
+      <div className="justify-end">
+        <Calendar className="border-0 " onChange={onChange} value={value} />
+      </div>
     </div>
   );
 }

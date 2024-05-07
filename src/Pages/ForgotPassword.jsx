@@ -30,7 +30,7 @@ function ForgotPassword() {
               <label className="relative flex imtems-center">
                 <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
-                  className="p-2 pl-10 border-2 border-grey rounded-md w-96"
+                  className="p-2 pl-10 border-2 border-grey rounded-md w-80 sm:w-96"
                   type="email"
                   placeholder="Email"
                   value={email}
@@ -41,7 +41,7 @@ function ForgotPassword() {
             </div>
             <Link to="/resetpassword">
               <button
-                className="text-white font-bold w-96 mt-10 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 py-3 text-lg"
+                className="text-white font-bold w-80 sm:w-96 mt-10 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 py-3 text-lg"
                 type="submit"
               >
                 Continue

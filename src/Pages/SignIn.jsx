@@ -61,7 +61,7 @@ function SignIn() {
               <label className="relative flex imtems-center">
                 <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
-                  className="p-2 pl-10 border-2 border-grey rounded-md w-96"
+                  className="p-2 pl-10 border-2 border-grey rounded-md w-80 sm:w-96"
                   type="email"
                   placeholder="Email"
                   value={email}
@@ -77,7 +77,7 @@ function SignIn() {
               <label className="relative flex items-center">
                 <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
-                  className="p-2 pl-10 border-2 border-grey rounded-md w-96"
+                  className="p-2 pl-10 border-2 border-grey rounded-md w-80 sm:w-96"
                   type={showPassword ? "text" : "password"} // Toggle input type based on password visibility state
                   placeholder="Password"
                   value={password}
@@ -104,7 +104,7 @@ function SignIn() {
                 Remember me
               </label>
               <Link
-                className="text-sky-400 ml-32 font-semibold  "
+                className="text-sky-400 ml-14 lg:ml-32 font-semibold  "
                 to="/forgotpassword"
               >
                 Forgot Password?
@@ -115,7 +115,7 @@ function SignIn() {
 
             <a href="/dashboard">
               <button
-                className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-96 text-white font-bold py-3 text-lg"
+                className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-80 sm:w-96 text-white font-bold py-3 text-lg"
                 type="submit"
                 disabled={loading}
               >

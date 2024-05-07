@@ -43,7 +43,7 @@ function ResetPassword() {
               <label className="relative flex imtems-center">
                 <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
-                  className="p-2 pl-10 border-2 border-grey rounded-md w-96"
+                  className="p-2 pl-10 border-2 border-grey rounded-md w-80 sm:w-96"
                   type={showPassword ? "text" : "password"} // Toggle input type based on password visibility state
                   placeholder="Enter Your New Password"
                   value={newPassword}
@@ -68,7 +68,7 @@ function ResetPassword() {
               <label className="relative flex imtems-center">
                 <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <input
-                  className="p-2 pl-10 border-2 border-grey rounded-md w-96"
+                  className="p-2 pl-10 border-2 border-grey rounded-md w-80 sm:w-96"
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm Your New Password"
                   value={confirmNewPassword}
@@ -91,7 +91,7 @@ function ResetPassword() {
 
             <Link to="/login">
               <button
-                className="text-white font-bold w-96 mt-10 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 py-3 text-lg"
+                className="text-white font-bold w-80 sm:w-96 mt-10 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 py-3 text-lg"
                 type="submit"
               >
                 Update

@@ -33,7 +33,7 @@ function Chart() {
     },
   };
   return (
-    <div className=" h-56 ">
+    <div className=" h-52 ">
       <div className="mt-2 p-2 h-screen">
         <Line data={data} options={options} />{" "}
       </div>

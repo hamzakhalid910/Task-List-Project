@@ -40,8 +40,8 @@ function Dashboard() {
           </div>
         </div>
         <div className="w-[100%] ">
-          <div className="grid grid-cols-1 lg:grid-cols-2 p-4 space-x-2">
-            <div className=" bg-white rounded-md">
+          <div className="flex lg:w-[100%] border-2 p-4 space-x-2">
+            <div className="border-2 w-[60%] bg-white rounded-md">
               <h1 className="mt-4 text-left font-bold px-4">
                 Total Task ratio
               </h1>
@@ -49,8 +49,8 @@ function Dashboard() {
                 <Chart />
               </div>
             </div>
-            <div className="flex items-center mt-2 md:mt-10 justify-center ">
-              <div className="mt-2 lg-mt-0 bg-white rounded-md">
+            <div className="flex w-[96%] lg:w-[40%] items-center mt-2 md:mt-10 justify-end ">
+              <div className="md:justify-end mt-2 lg-mt-0 bg-white rounded-md">
                 <div className="w-[96%]">
                   <BasicDateCalendar />
                 </div>

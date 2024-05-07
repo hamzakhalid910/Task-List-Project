@@ -5,17 +5,17 @@ import { TaskListIcon } from "./TaskListIcon";
 function Header({ pageName }) {
   return (
     <div className=" flex justify-between items-center">
-      <div className="w-[15%] h-16 flex items-center py-4 pl-6">
+      <div className="w-[15%] h-16 flex items-center py-4 pl-3 lg:pl-6">
         <div>
           <TaskListIcon />
         </div>
-        <h1 className=" text-sky-400 font-bold text-lg text-left ml-2 h-12 content-center">
+        <h1 className=" hidden md:block text-sky-400 font-bold text-lg text-left ml-2 h-12 content-center">
           Task List Manager
         </h1>
       </div>
 
       <div className=" border-l-2 border-gray-100 flex h-16 py-4 w-[65%] content-center">
-        <h2 className="font-bold text-left pl-10 content-center text-2xl">
+        <h2 className="font-Desktop  font-bold text-left pl-2 lg:pl-10 content-center text-md lg:text-2xl">
           {pageName}
         </h2>
       </div>
@@ -33,8 +33,10 @@ function Header({ pageName }) {
           alt="User"
         />
         <div className="content-center">
-          <p className="ml-2 font-bold">Hamza Khalid</p>
-          <p className="ml-2 text-gray-500 text-sm text-left">Status-200</p>
+          <p className="hidden md:block ml-2 font-bold ">Hamza Khalid</p>
+          <p className="hidden md:block ml-2 text-gray-500 text-sm text-left">
+            Status-200
+          </p>
         </div>
       </div>
     </div>

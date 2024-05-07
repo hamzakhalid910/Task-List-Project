@@ -5,9 +5,9 @@ import Menu from "./Menu";
 
 function NotificationsList() {
   return (
-    <div className="bg-gray-100 w-[72%]">
+    <div className="bg-gray-100 w-[85%] h-screen">
       <div className=" w-[100%] text-left ">
-        <h1 className="text-2xl px-12 mt-4 font-bold text-xl text-gray-600">
+        <h1 className=" px-12 mt-4 font-bold text-xl text-gray-600">
           Notification
         </h1>
         <p className="text-xs mt-1 px-12 ">You have 2 unread notifications.</p>
