@@ -19,18 +19,47 @@ function AddModal({ onSubmit }) {
     }));
   };
 
+  const getUserIdFromToken = () => {
+    try {
+      const token = localStorage.getItem("jsonwebtoken");
+      console.log(token);
+      if (token) {
+        const tokenPayload = token.split(".")[1]; // Extracting payload part
+        const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
+        console.log("Try fecting User ID");
+        console.log(decodedPayload.userId);
+        return decodedPayload.userId; // Return user ID
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("STrat Try");
+      const userId = getUserIdFromToken();
+      console.log("UserID:", userId);
+      if (!userId) {
+        console.error("User ID not found in token or token is invalid");
+        return;
+      }
+
+      const updatedFormData = { ...formData, user: userId };
+
+      console.log("User in Form:", updatedFormData);
+
       const response = await axios.post(
         "http://localhost:3000/api/tasks/addtask",
-        formData
+        updatedFormData
       );
       console.log("Task added successfully:", response.data);
-      onSubmit(formData); // Pass the form data to handleModalSubmit
+      onSubmit(updatedFormData);
+      // onTaskAdded(response.data); // Pass the form data to handleModalSubmit
     } catch (error) {
       console.error(
-        "Error adding task:",
+        "Error adding taskkk:",
         error.response?.data || error.message
       );
     }

@@ -8,10 +8,11 @@ function Task() {
   const [tasks, setTasks] = useState([]);
   const [submittedData, setSubmittedData] = useState([]);
   let [showModal, setShowModal] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [startDate, setStartDate] = useState(""); // State for start date
   const [endDate, setEndDate] = useState(""); // State for end date
+  const [loggedInUserId, setLoggedInUserId] = useState(""); // Assuming you set this state somewhere
+  const [isOpen, setIsOpen] = useState(false);
 
   // Function to handle search input change
   const handleSearchChange = (event) => {
@@ -31,16 +32,42 @@ function Task() {
     setShowModal(false);
   }
 
+  const getUserIdFromToken = () => {
+    try {
+      const token = localStorage.getItem("jsonwebtoken");
+      console.log(token);
+      if (token) {
+        const tokenPayload = token.split(".")[1]; // Extracting payload part
+        const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
+        console.log("Try fecting User ID");
+        console.log(decodedPayload.userId);
+        setLoggedInUserId(decodedPayload.userId);
+        console.log("Logged In User:", loggedInUserId);
+        return decodedPayload.userId; // Return user ID
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+    }
+  };
+
   useEffect(() => {
+    console.log("before axios");
     axios
-      .get("http://localhost:3000/api/tasks")
+      .get("http://localhost:3000/api/tasks/")
       .then((response) => {
-        setTasks(response.data);
+        getUserIdFromToken();
+        console.log(response.data);
+        // Filter tasks based on logged-in user's ID
+        const filteredTasks = response.data.filter(
+          (task) => task.user === loggedInUserId
+        );
+        console.log(filteredTasks);
+        setTasks(filteredTasks);
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
       });
-  }, []);
+  }, [loggedInUserId]);
 
   // Function to filter tasks based on search query and dates
   const filteredTasks = tasks.filter((task) => {
@@ -149,16 +176,16 @@ function Task() {
                   <h4 className="font-bold p-2 w-[90%] text-left">
                     Title: {task.title}
                   </h4>
-                  <div className="relative ">
+                  <div className="relative">
                     <button
                       className="justify-end"
                       onClick={() => setIsOpen(!isOpen)}
                     >
                       <img
-                        className=" h-6 mx-auto justify-end  mt-2"
+                        className="h-6 mx-auto justify-end mt-2"
                         src="src/Pages/Images/Options.png"
                         alt="Options"
-                      ></img>
+                      />
                     </button>
                     {isOpen && (
                       <div className="px-2 absolute top-8 right-0 bg-white border border-gray-300 rounded shadow-md">
@@ -191,7 +218,7 @@ function Task() {
                 </div>
                 <div className="flex">
                   <h7 className="font-bold px-2 ">Start Date:</h7>
-                  <h8 className="font-bold ml-44">End Date:</h8>
+                  <h7 className="font-bold ml-44">End Date:</h7>
                 </div>
                 <div className="flex">
                   <p className="ml-2">{formatDate(task.startDate)}</p>

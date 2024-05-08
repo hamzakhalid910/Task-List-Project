@@ -7,15 +7,15 @@ import { SettingIcon } from "./SettingIcon";
 
 function Menu() {
   const [active, setActive] = useState("dashboard");
-  // const [userRole, setUserRole] = useState(null); // State to store user role
+  const [userRole, setUserRole] = useState(null); // State to store user role
 
   useEffect(() => {
     // Function to retrieve user role from token in local storage
     const getUserRoleFromToken = () => {
       try {
         const token = localStorage.getItem("jsonwebtoken");
-        console.log("Token from localStorage:", token); // Log token
         if (token) {
+          console.log("Token from localStorage:", token); // Log token
           const tokenPayload = token.split(".")[1]; // Extracting payload part
           const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
           console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
@@ -49,22 +49,21 @@ function Menu() {
         </button>
       </Link>
 
-
-      <Link to="/users">
-        <button
-          className={`font-blue flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
-            active === "users" ? "text-sky-500" : "text-black"
-          }`}
-          onClick={() => setActive("users")}
-        >
-          <div className="mr-1">
-            <UserIcon />
-          </div>
-          <span className="hidden sm:inline-block ">Users</span>
-        </button>
-      </Link>
-
-
+      {userRole === "admin" && (
+        <Link to="/users">
+          <button
+            className={`font-blue flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+              active === "users" ? "text-sky-500" : "text-black"
+            }`}
+            onClick={() => setActive("users")}
+          >
+            <div className="mr-1">
+              <UserIcon />
+            </div>
+            <span className="hidden sm:inline-block ">Users</span>
+          </button>
+        </Link>
+      )}
       <Link to="/Task">
         <button
           className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
