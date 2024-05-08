@@ -29,6 +29,12 @@ function SignIn() {
         }
       );
       console.log(response.data);
+      const token = response.data.token; // Assuming token is returned in the response
+      localStorage.setItem("jsonwebtoken", token);
+      if (token) {
+        console.log("Token Found in Local:", token);
+      }
+
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error.message);
@@ -114,7 +120,7 @@ function SignIn() {
             <br />
 
             <button
-              className="mt-4 border-2 rounded-md px-28 py-2 bg-[#4BCBEB] hover:bg-sky-700 w-80 sm:w-96 text-white font-bold py-3 text-lg relative"
+              className="mt-4 border-2 rounded-md px-28 bg-[#4BCBEB] hover:bg-sky-700 w-80 sm:w-96 text-white font-bold py-3 text-lg relative"
               type="submit"
               disabled={loading}
               style={{ minHeight: "3rem" }} // Set minimum height to maintain button height

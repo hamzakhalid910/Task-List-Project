@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "./MenuIcon";
 import UserIcon from "./UserIcon";
@@ -7,6 +7,27 @@ import { SettingIcon } from "./SettingIcon";
 
 function Menu() {
   const [active, setActive] = useState("dashboard");
+  // const [userRole, setUserRole] = useState(null); // State to store user role
+
+  useEffect(() => {
+    // Function to retrieve user role from token in local storage
+    const getUserRoleFromToken = () => {
+      try {
+        const token = localStorage.getItem("jsonwebtoken");
+        console.log("Token from localStorage:", token); // Log token
+        if (token) {
+          const tokenPayload = token.split(".")[1]; // Extracting payload part
+          const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
+          console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
+          setUserRole(decodedPayload.role); // Set user role
+          console.log("Decoded Token Role:", decodedPayload.role); // Log user role
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    };
+    getUserRoleFromToken(); // Call the function when component mounts
+  }, []); // Empty dependency array ensures this effect runs only once on component mount
 
   return (
     <div className="w-[15%] bg-white-100 text-left border-1 p-2 lg:p-4 ">
@@ -27,6 +48,8 @@ function Menu() {
           <span className="hidden sm:inline-block">Dashboard</span>
         </button>
       </Link>
+
+
       <Link to="/users">
         <button
           className={`font-blue flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
@@ -40,6 +63,8 @@ function Menu() {
           <span className="hidden sm:inline-block ">Users</span>
         </button>
       </Link>
+
+
       <Link to="/Task">
         <button
           className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${

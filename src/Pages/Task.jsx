@@ -48,10 +48,14 @@ function Task() {
     const searchMatch =
       task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       task.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     // Filter by start and end dates if provided
-    const startDateMatch = startDate ? new Date(task.startDate) >= new Date(startDate) : true;
-    const endDateMatch = endDate ? new Date(task.endDate) <= new Date(endDate) : true;
+    const startDateMatch = startDate
+      ? new Date(task.startDate) >= new Date(startDate)
+      : true;
+    const endDateMatch = endDate
+      ? new Date(task.endDate) <= new Date(endDate)
+      : true;
 
     return searchMatch && startDateMatch && endDateMatch;
   });
@@ -61,16 +65,41 @@ function Task() {
       <Header pageName="Task" />
       <div className="flex h-[96%]">
         <Menu />
-        <div className="w-[85%] bg-gray-100">
-          <div className="flex mt-12 ml-8  ">
-            <div className="flex  w-[70%] ">
-              <h1 className="font-semibold text-lg text-left content-center p-2 ">
+        <div className="w-[85%] border-2 bg-gray-100">
+          <div className="flex mt-12 ml-8 border-2 ">
+            <div className="border-green-500 w-[20%] ">
+              <h1 className="ml-8 font-semibold text-lg text-left content-center py-2">
                 Start date:
               </h1>
-              <h2 className="font-semibold text-lg text-left content-center p-2 ml-24">
-                End date:
-              </h2>
+              <div className="w-[90%]">
+                <input
+                  className=" w-[100%] ml-8 h-12  rounded-md border-2 border-blue-200 p-2"
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  required
+                />
+              </div>
             </div>
+
+            <div className=" border-green-500 w-[20%]">
+              <div>
+                <h2 className="ml-8 font-semibold text-lg text-left content-center py-2">
+                  End date:
+                </h2>
+              </div>
+              <div className="w-[90%]">
+                <input
+                  className="ml-8 h-12 rounded-md border-2 border-blue-200 p-2"
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Add Task Modal */}
             <div className="flex w-[30%] ">
               <button
                 className="mx-auto"
@@ -83,23 +112,6 @@ function Task() {
                 />
               </button>
             </div>
-          </div>
-
-          <div className="flex">
-            <input
-              className="ml-8 w-[20%] h-12 rounded-md border-2 p-2"
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              required
-            />
-            <input
-              className="ml-8 w-[20%] h-12 rounded-md border-2 p-2"
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              required
-            />
           </div>
 
           <div className="ml-8 ">

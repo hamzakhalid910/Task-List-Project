@@ -66,7 +66,7 @@ function UserList() {
   return (
     <div className="w-[85%] bg-gray-100 x-4 py-2 h-screen flex ">
       <div className="flex-wrap mx-auto my-auto w-[94%] bg-white h-[90%] rounded-xl border-2 border-blue-100">
-        <h1 className="text-left font-bold text-lg py-2 ml-5 text-xl">
+        <h1 className="text-left font-bold py-2 ml-5 text-xl">
           Online User
         </h1>
         <div className="flex w-[100%] font-semibold text-left ml-4">

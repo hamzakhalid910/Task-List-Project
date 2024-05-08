@@ -16,6 +16,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    default: "user", // Default role is 'user'
+    enum: ["user", "admin"], // Available roles
+  },
+
   // Other user properties
 });
 userSchema.pre("save", async function () {
@@ -25,7 +31,9 @@ userSchema.pre("save", async function () {
 });
 
 userSchema.methods.createJWT = function () {
-  return jwt.sign({ userId: this._id }, "jwtSecret", { expiresIn: "1h" });
+  return jwt.sign({ userId: this._id, role: this.role }, "jwtSecret", {
+    expiresIn: "1h",
+  });
 };
 
 const User = mongoose.model("User", userSchema);
