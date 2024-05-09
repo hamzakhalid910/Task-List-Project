@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { TaskListIcon } from "./TaskListIcon";
 
 function Header({ pageName }) {
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    // Function to retrieve user role from token in local storage
+    const getUserNameFromToken = () => {
+      try {
+        const token = localStorage.getItem("jsonwebtoken");
+        if (token) {
+          console.log("Token from localStorage:", token); // Log token
+          const tokenPayload = token.split(".")[1]; // Extracting payload part
+          const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
+          console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
+          setUserName(decodedPayload.fullname); // Set user role
+          console.log("Decoded Token Name:", decodedPayload.fullname); // Log user role
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    };
+    getUserNameFromToken(); // Call the function when component mounts
+  }, []);
+
   return (
     <div className=" flex justify-between items-center">
       <div className="w-[15%] h-16 flex items-center py-4 pl-3 lg:pl-6">
@@ -33,7 +54,7 @@ function Header({ pageName }) {
           alt="User"
         />
         <div className="content-center">
-          <p className="hidden md:block ml-2 font-bold ">Hamza Khalid</p>
+          <p className="hidden md:block ml-2 font-bold ">{userName}</p>
           <p className="hidden md:block ml-2 text-gray-500 text-sm text-left">
             Status-200
           </p>

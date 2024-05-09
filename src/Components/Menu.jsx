@@ -4,10 +4,12 @@ import MenuIcon from "./MenuIcon";
 import UserIcon from "./UserIcon";
 import { TaskIcon } from "./TaskIcon";
 import { SettingIcon } from "./SettingIcon";
+import { useNavigate } from "react-router-dom";
 
 function Menu() {
   const [active, setActive] = useState("dashboard");
   const [userRole, setUserRole] = useState(null); // State to store user role
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Function to retrieve user role from token in local storage
@@ -28,6 +30,12 @@ function Menu() {
     };
     getUserRoleFromToken(); // Call the function when component mounts
   }, []); // Empty dependency array ensures this effect runs only once on component mount
+
+  const handleLogout = () => {
+    localStorage.removeItem("jsonwebtoken");
+    navigate("/login"); // Remove JWT token from local storage
+    // Additional logic for logout such as redirecting to login page can be added here
+  };
 
   return (
     <div className="w-[15%] bg-white-100 text-left border-1 p-2 lg:p-4 ">
@@ -90,6 +98,12 @@ function Menu() {
           <span className="hidden sm:inline-block">Setting</span>
         </button>
       </Link>
+      <button
+        className="flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 text-black"
+        onClick={handleLogout}
+      >
+        <span>Log Out</span>
+      </button>
     </div>
   );
 }

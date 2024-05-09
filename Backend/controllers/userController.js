@@ -89,7 +89,7 @@ export const loginUser = async (req, res) => {
     res
       .status(200)
       .json({
-        user: { email: user.email, name: user.fullname, role: user.role },
+        user: { email: user.email, fullname: user.fullname, role: user.role },
         token,
       });
   } catch (err) {
