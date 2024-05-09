@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AddModal from "../Components/AddModal";
+import TaskOptions from "../Components/TaskOptions";
 import Header from "../Components/Header";
 import Menu from "../Components/Menu";
 import axios from "axios";
@@ -8,12 +9,13 @@ import DeleteTaskModal from "../Components/DeleteTaskModal";
 function Task() {
   const [tasks, setTasks] = useState([]);
   const [submittedData, setSubmittedData] = useState([]);
-  let [showModal, setShowModal] = useState(false);
+  let [showAddModal, setShowAddModal] = useState(false);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [startDate, setStartDate] = useState(""); // State for start date
   const [endDate, setEndDate] = useState(""); // State for end date
   const [loggedInUserId, setLoggedInUserId] = useState(""); // Assuming you set this state somewhere
-  const [isOpen, setIsOpen] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
   // Function to handle search input change
   const handleSearchChange = (event) => {
@@ -30,28 +32,8 @@ function Task() {
 
   function handleModalSubmit(data) {
     setSubmittedData([...submittedData, data]);
-    setShowModal(false);
+    setShowAddModal(false);
   }
-
-  const handleTaskDelete = (taskId) => {
-    setShowDeleteTaskModal(false);
-    console.log("before axios");
-
-    axios
-      .delete(`http://localhost:3000/api/tasks/${taskId}`)
-      .then((response) => {
-        const updatedTasks = filteredTasks.filter(
-          (task) => task._id !== taskId
-        );
-        setFilteredTasks(updatedTasks);
-        if (selectedTaskId === taskId) {
-          setSelectedTaskId(null);
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting task:", error);
-      });
-  };
 
   const getUserIdFromToken = () => {
     try {
@@ -72,7 +54,6 @@ function Task() {
   };
 
   useEffect(() => {
-    console.log("before axios");
     axios
       .get("http://localhost:3000/api/tasks/")
       .then((response) => {
@@ -151,7 +132,7 @@ function Task() {
             <div className="flex w-[30%] ">
               <button
                 className="mx-auto"
-                onClick={() => setShowModal(!showModal)}
+                onClick={() => setShowAddModal(!showAddModal)}
               >
                 <img
                   className="object-contain h-12 w-32 ml-18"
@@ -200,7 +181,7 @@ function Task() {
                   <div className="relative">
                     <button
                       className="justify-end"
-                      onClick={() => setIsOpen(!isOpen)}
+                      onClick={() => setShowOptions(!showOptions)}
                     >
                       <img
                         className="h-6 mx-auto justify-end mt-2"
@@ -208,33 +189,7 @@ function Task() {
                         alt="Options"
                       />
                     </button>
-                    {isOpen && (
-                      <div className="px-2 absolute top-8 right-0 bg-white border border-gray-300 rounded shadow-md">
-                        <ul>
-                          <li className="px-4">
-                            <button
-                              onClick={() => {
-                                console.log("Delete button clicked");
-                                console.log(showDeleteTaskModal);
-                                setShowDeleteTaskModal(!showDeleteTaskModal);
-                              }}
-                            >
-                              Delete
-                            </button>
-                          </li>
-                          <li>
-                            <button onClick={() => console.log("View clicked")}>
-                              View
-                            </button>
-                          </li>
-                          <li>
-                            <button onClick={() => console.log("Edit clicked")}>
-                              Edit
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    )}
+                    <TaskOptions showOptions={showOptions} />
                   </div>
                 </div>
                 <p className="mt-2 text-left px-2">Task {index + 1}</p>
@@ -260,10 +215,7 @@ function Task() {
             ))}
           </div>
 
-          {showModal && <AddModal onSubmit={handleModalSubmit} />}
-          {showDeleteTaskModal && (
-            <DeleteTaskModal onDelete={handleTaskDelete} />
-          )}
+          {showAddModal && <AddModal onSubmit={handleModalSubmit} />}
         </div>
       </div>
     </div>

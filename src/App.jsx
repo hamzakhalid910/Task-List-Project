@@ -35,30 +35,12 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute element={<AdminDashboard />} loggedIn={loggedIn} />
-          }
-        />
-        <Route
-          path="/users"
-          element={<ProtectedRoute element={<Users />} loggedIn={loggedIn} />}
-        />
-        <Route
-          path="/task"
-          element={<ProtectedRoute element={<Task />} loggedIn={loggedIn} />}
-        />
-        <Route
-          path="/setting"
-          element={<ProtectedRoute element={<Setting />} loggedIn={loggedIn} />}
-        />
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedRoute element={<Notifications />} loggedIn={loggedIn} />
-          }
-        />
+        <Route path="/dashboard" element={<AdminDashboard />} />
+
+        <Route path="/users" element={<Users />} />
+        <Route path="/task" element={<Task />} />
+        <Route path="/setting" element={<Setting />} />
+        <Route path="/notifications" element={<Notifications />} />
       </Routes>
     </Router>
   );
