@@ -13,24 +13,60 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import Notifications from "./Pages/Notifications";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header";
+import PropTypes from "prop-types";
+import ProtectedRoute from "./Pages/ProtectedRoute";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<SignUp />} />
-        <Route path="/login" element={<SignIn />} />
+        <Route path="/login" element={<SignIn onLogin={handleLogin} />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
 
-        <Route path="/dashboard" element={<AdminDashboard />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/task" element={<Task />} />
-        <Route path="/setting" element={<Setting />} />
-        <Route path="/notifications" element={<Notifications />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute element={<AdminDashboard />} loggedIn={loggedIn} />
+          }
+        />
+        <Route
+          path="/users"
+          element={<ProtectedRoute element={<Users />} loggedIn={loggedIn} />}
+        />
+        <Route
+          path="/task"
+          element={<ProtectedRoute element={<Task />} loggedIn={loggedIn} />}
+        />
+        <Route
+          path="/setting"
+          element={<ProtectedRoute element={<Setting />} loggedIn={loggedIn} />}
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute element={<Notifications />} loggedIn={loggedIn} />
+          }
+        />
       </Routes>
     </Router>
   );
 }
+
+App.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+};
 
 export default App;

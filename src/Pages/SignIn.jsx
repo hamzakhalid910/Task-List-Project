@@ -5,7 +5,7 @@ import signInImage from "./Images/SignIn.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function SignIn() {
+function SignIn({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State to track password visibility
@@ -34,7 +34,7 @@ function SignIn() {
       if (token) {
         console.log("Token Found in Local:", token);
       }
-
+      onLogin();
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error.message);

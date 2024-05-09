@@ -3,6 +3,7 @@ import AddModal from "../Components/AddModal";
 import Header from "../Components/Header";
 import Menu from "../Components/Menu";
 import axios from "axios";
+import DeleteTaskModal from "../Components/DeleteTaskModal";
 
 function Task() {
   const [tasks, setTasks] = useState([]);
@@ -13,7 +14,7 @@ function Task() {
   const [endDate, setEndDate] = useState(""); // State for end date
   const [loggedInUserId, setLoggedInUserId] = useState(""); // Assuming you set this state somewhere
   const [isOpen, setIsOpen] = useState(false);
-
+  const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
   // Function to handle search input change
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -31,6 +32,26 @@ function Task() {
     setSubmittedData([...submittedData, data]);
     setShowModal(false);
   }
+
+  const handleTaskDelete = (taskId) => {
+    setShowDeleteTaskModal(false);
+    console.log("before axios");
+
+    axios
+      .delete(`http://localhost:3000/api/tasks/${taskId}`)
+      .then((response) => {
+        const updatedTasks = filteredTasks.filter(
+          (task) => task._id !== taskId
+        );
+        setFilteredTasks(updatedTasks);
+        if (selectedTaskId === taskId) {
+          setSelectedTaskId(null);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting task:", error);
+      });
+  };
 
   const getUserIdFromToken = () => {
     try {
@@ -190,14 +211,25 @@ function Task() {
                     {isOpen && (
                       <div className="px-2 absolute top-8 right-0 bg-white border border-gray-300 rounded shadow-md">
                         <ul>
-                          <li className="border-b px-4">
-                            <button onClick={() => console.log("Edit clicked")}>
-                              Edit
+                          <li className="px-4">
+                            <button
+                              onClick={() => {
+                                console.log("Delete button clicked");
+                                console.log(showDeleteTaskModal);
+                                setShowDeleteTaskModal(!showDeleteTaskModal);
+                              }}
+                            >
+                              Delete
                             </button>
                           </li>
                           <li>
-                            <button onClick={() => console.log("Add clicked")}>
-                              Add
+                            <button onClick={() => console.log("View clicked")}>
+                              View
+                            </button>
+                          </li>
+                          <li>
+                            <button onClick={() => console.log("Edit clicked")}>
+                              Edit
                             </button>
                           </li>
                         </ul>
@@ -229,6 +261,9 @@ function Task() {
           </div>
 
           {showModal && <AddModal onSubmit={handleModalSubmit} />}
+          {showDeleteTaskModal && (
+            <DeleteTaskModal onDelete={handleTaskDelete} />
+          )}
         </div>
       </div>
     </div>
