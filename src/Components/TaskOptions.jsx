@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DeleteTaskModal from "./DeleteTaskModal";
 
-function TaskOptions({ showOptions }) {
+function TaskOptions({ showOptions, taskId }) {
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
 
   return (
@@ -18,6 +18,7 @@ function TaskOptions({ showOptions }) {
                     (prevshowDeleteTaskModal) => !prevshowDeleteTaskModal
                   );
                   console.log("After:", showDeleteTaskModal);
+                  console.log("Task ID we deleting - options:", taskId);
                 }}
               >
                 Delete
@@ -32,7 +33,7 @@ function TaskOptions({ showOptions }) {
           </ul>
         </div>
       )}
-      {showDeleteTaskModal && <DeleteTaskModal />}
+      {showDeleteTaskModal && <DeleteTaskModal taskId={taskId} />}
     </>
   );
 }

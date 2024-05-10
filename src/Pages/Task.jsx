@@ -17,7 +17,12 @@ function Task() {
   const [loggedInUserId, setLoggedInUserId] = useState(""); // Assuming you set this state somewhere
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
-  // Function to handle search input change
+
+  const handleOptionsClick = (taskId) => {
+    setSelectedTaskId(taskId);
+    setShowOptions(!showOptions);
+  };
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -181,7 +186,9 @@ function Task() {
                   <div className="relative">
                     <button
                       className="justify-end"
-                      onClick={() => setShowOptions(!showOptions)}
+                      onClick={() => {
+                        handleOptionsClick(task._id);
+                      }}
                     >
                       <img
                         className="h-6 mx-auto justify-end mt-2"
@@ -189,7 +196,12 @@ function Task() {
                         alt="Options"
                       />
                     </button>
-                    <TaskOptions showOptions={showOptions} />
+                    {showOptions && selectedTaskId === task._id && (
+                      <TaskOptions
+                        showOptions={showOptions}
+                        taskId={task._id}
+                      />
+                    )}
                   </div>
                 </div>
                 <p className="mt-2 text-left px-2">Task {index + 1}</p>

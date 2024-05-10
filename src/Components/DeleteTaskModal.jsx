@@ -1,28 +1,27 @@
 import { useState } from "react";
 import axios from "axios";
 
-function DeleteTaskModal() {
+function DeleteTaskModal({ taskId }) {
   const [cross, setCross] = useState(true);
+  const [filteredTasks, setFilteredTasks] = useState();
 
   const crossDisplay = () => {
     setCross(!cross);
   };
 
-  taskId = "663bf599b886de5a53fea487";
-  const handleTaskDelete = (taskId) => {
-    console.log("before axios");
-    console.log("task ID:", taskId);
-
+  const handleTaskDelete = () => {
+    console.log("task ID - DeleteModal:", taskId);
     axios
       .delete(`http://localhost:3000/api/tasks/${taskId}`)
       .then((response) => {
+        setCross(!cross);
         const updatedTasks = filteredTasks.filter(
           (task) => task._id !== taskId
         );
         setFilteredTasks(updatedTasks);
-        if (selectedTaskId === taskId) {
-          setSelectedTaskId(null);
-        }
+        // if (selectedTaskId === taskId) {
+        //   setSelectedTaskId(null);
+        // }
       })
       .catch((error) => {
         console.error("Error deleting task:", error);

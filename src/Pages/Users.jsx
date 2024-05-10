@@ -6,10 +6,11 @@ import { FaUser, FaLock } from "react-icons/fa";
 
 function Users() {
   return (
-    <div className="h-[96%]">
-      <Header pageName="User's" />
-
-      <div className="flex ">
+    <div className="h-fit">
+      <div className="h-fit">
+        <Header pageName="User's" />
+      </div>
+      <div className="flex h-fit">
         <Menu />
         <UserList />
       </div>
