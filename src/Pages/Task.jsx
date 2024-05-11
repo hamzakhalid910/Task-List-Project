@@ -17,6 +17,24 @@ function Task() {
   const [loggedInUserId, setLoggedInUserId] = useState(""); // Assuming you set this state somewhere
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+
+  const getUserRoleFromToken = () => {
+    try {
+      const token = localStorage.getItem("jsonwebtoken");
+      if (token) {
+        console.log("Token from localStorage:", token); // Log token
+        const tokenPayload = token.split(".")[1]; // Extracting payload part
+        const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
+        console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
+        setUserRole(decodedPayload.role); // Set user role
+        console.log("Decoded Token Role:", decodedPayload.role);
+        return decodedPayload.role; // Log user role
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+    }
+  };
 
   const handleOptionsClick = (taskId) => {
     setSelectedTaskId(taskId);
@@ -65,11 +83,18 @@ function Task() {
         getUserIdFromToken();
         console.log(response.data);
         // Filter tasks based on logged-in user's ID
-        const filteredTasks = response.data.filter(
-          (task) => task.user === loggedInUserId
-        );
-        console.log(filteredTasks);
-        setTasks(filteredTasks);
+        console.log("User Role:", getUserRoleFromToken());
+        setUserRole(getUserRoleFromToken());
+        console.log("New Role:", userRole);
+        if (userRole === "user") {
+          const filteredTasks = response.data.filter(
+            (task) => task.user === loggedInUserId
+          );
+          console.log("Filtered Task:", filteredTasks);
+          setTasks(filteredTasks);
+        } else {
+          setTasks(response.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);

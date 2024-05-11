@@ -5,6 +5,7 @@ import UserIcon from "./UserIcon";
 import { TaskIcon } from "./TaskIcon";
 import { SettingIcon } from "./SettingIcon";
 import { useNavigate } from "react-router-dom";
+import { LogoutIcon } from "./LogoutIcon";
 
 function Menu() {
   const [active, setActive] = useState("dashboard");
@@ -57,6 +58,8 @@ function Menu() {
         </button>
       </Link>
 
+      {/* --------- */}
+
       {userRole === "admin" && (
         <Link to="/users">
           <button
@@ -72,6 +75,9 @@ function Menu() {
           </button>
         </Link>
       )}
+
+      {/* ---- */}
+
       <Link to="/Task">
         <button
           className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
@@ -85,6 +91,9 @@ function Menu() {
           <span className="hidden sm:inline-block">Task</span>
         </button>
       </Link>
+
+      {/*-------- */}
+
       <Link to="/setting">
         <button
           className={`flex shadow  w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
@@ -98,11 +107,15 @@ function Menu() {
           <span className="hidden sm:inline-block">Setting</span>
         </button>
       </Link>
+
       <button
-        className="flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 text-black"
+        className="flex shadow  w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200"
         onClick={handleLogout}
       >
-        <span>Log Out</span>
+        <div className="mr-1">
+          <LogoutIcon />
+        </div>
+        <span className="hidden sm:inline-block">Log Out</span>
       </button>
     </div>
   );
