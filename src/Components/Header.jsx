@@ -25,7 +25,7 @@ function Header({ pageName }) {
   }, []);
 
   return (
-    <div className="flex border-2 justify-between items-center">
+    <div className="flex  justify-between items-center">
       <div className="w-[15%] h-16 flex items-center py-4 pl-3 lg:pl-6">
         <div>
           <TaskListIcon />
