@@ -14,8 +14,7 @@ import Notifications from "./Pages/Notifications";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header";
 import PropTypes from "prop-types";
-import ProtectedRoute from "./Pages/ProtectedRoute";
-
+import PrivateRoute from "./Components/PrivateRoute";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -34,13 +33,19 @@ function App() {
         <Route path="/login" element={<SignIn onLogin={handleLogin} />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
-
-        <Route path="/dashboard" element={<AdminDashboard />} />
-
-        <Route path="/users" element={<Users />} />
-        <Route path="/task" element={<Task />} />
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route index element={<AdminDashboard />} />
+        </Route>
+        <Route path="/users" element={<PrivateRoute />}>
+          <Route index element={<Users />} />
+        </Route>
+        <Route path="/task" element={<PrivateRoute />}>
+          <Route index element={<Task />} />
+        </Route>
         <Route path="/setting" element={<Setting />} />
-        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/notifications" element={<PrivateRoute />}>
+          <Route index element={<Notifications />} />
+        </Route>
       </Routes>
     </Router>
   );
