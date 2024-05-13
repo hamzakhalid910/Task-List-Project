@@ -18,7 +18,8 @@ function UserList() {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+    setIsLoading(false);
+  }, [users]);
 
   const fetchUsers = async () => {
     setIsLoading(true);

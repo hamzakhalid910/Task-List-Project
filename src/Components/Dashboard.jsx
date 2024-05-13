@@ -92,7 +92,7 @@ function Dashboard() {
 
   return (
     <div className="w-[85%] bg-gray-100 px-4 py-2 h-full lg:h-screen flex">
-      <div className="flex-wrap mx-auto my-auto w-[94%] bg-white rounded-xl border-2 border-blue-100">
+      <div className="flex-wrap h-[90%] mx-auto my-auto w-[94%] bg-white rounded-xl border-2 border-blue-100">
         <h2 className="font-bold text-left p-2 ml-4 text-xl ">Analytics</h2>
         <div className=" lg:flex w-[100%]  text-sm font-poppins">
           <div className="w-[90%] py-2 lg:w-[23%] h-28 mx-auto mt-2 font-bold border-1 rounded-md bg-[#F4F2FF]">

@@ -92,34 +92,40 @@ function Task() {
     }
   };
 
+  function fetchTasks() {
+    {
+      axios
+        .get("http://localhost:3000/api/tasks/")
+        .then((response) => {
+          getUserIdFromToken();
+          console.log(response.data);
+          // Filter tasks based on logged-in user's ID
+          console.log("User Role:", getUserRoleFromToken());
+          setTimeout(() => {
+            const userRole = getUserRoleFromToken();
+            setUserRole(userRole);
+          }, 2000);
+          //  setUserRole(getUserRoleFromToken());
+          console.log("New Role:", userRole);
+          if (userRole === "user") {
+            const filteredTasks = response.data.filter(
+              (task) => task.user === loggedInUserId
+            );
+            console.log("Filtered Task:", filteredTasks);
+            setTasks(filteredTasks);
+          } else {
+            setTasks(response.data);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching tasks:", error);
+        });
+    }
+  }
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/tasks/")
-      .then((response) => {
-        getUserIdFromToken();
-        console.log(response.data);
-        // Filter tasks based on logged-in user's ID
-        console.log("User Role:", getUserRoleFromToken());
-        setTimeout(() => {
-          const userRole = getUserRoleFromToken();
-          setUserRole(userRole);
-        }, 2000);
-      //  setUserRole(getUserRoleFromToken());
-        console.log("New Role:", userRole);
-        if (userRole === "user") {
-          const filteredTasks = response.data.filter(
-            (task) => task.user === loggedInUserId
-          );
-          console.log("Filtered Task:", filteredTasks);
-          setTasks(filteredTasks);
-        } else {
-          setTasks(response.data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching tasks:", error);
-      });
-  }, [userRole]);
+    fetchTasks();
+  }, [loggedInUserId]);
 
   // Function to filter tasks based on search query and dates
   const filteredTasks = tasks.filter((task) => {
@@ -230,9 +236,8 @@ function Task() {
                 ></div>
                 <div className="flex ">
                   <h4 className="font-gray-200 px-2 w-[90%] text-left">
-                    Title: 
+                    Title:
                     <p className="mt-2 text-left "> {task.title}</p>
-
                   </h4>
                   <div className="relative">
                     <button

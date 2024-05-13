@@ -26,7 +26,7 @@ function Header({ pageName }) {
 
   return (
     <div className="flex  justify-between items-center">
-      <div className="w-[15%] h-16 flex items-center py-4 pl-2 lg:pl-4">
+      <div className="w-[13.5%] lg:w-[15%] h-16 flex items-center py-4 pl-2 lg:pl-4">
         <div>
           <TaskListIcon />
         </div>
@@ -35,27 +35,27 @@ function Header({ pageName }) {
         </h1>
       </div>
 
-      <div className=" border-l-2 border-gray-100 flex h-16 py-4 w-[65%] content-center">
+      <div className=" border-l-2 border-gray-100 flex h-16 py-4 w-[35%] lg:w-[65%] content-center">
         <h2 className="font-Desktop  font-bold text-left pl-2 lg:pl-10 content-center text-md lg:text-2xl">
           {pageName}
         </h2>
       </div>
 
-      <div className="flex py-4 h-16 py-2 w-[5%] content-center justify-end ">
+      <div className="flex py-4 h-16 py-2 w-[10] lg:w-[5%] content-center justify-end ">
         <Link to="/notifications">
           <img className="h-7 w-7" src="src\Pages\Images\bell.png" alt="" />
         </Link>
       </div>
 
-      <div className=" flex h-16 px-4 py-2 w-[15%] justify-start content-center">
+      <div className=" flex h-16 px-4 py-2 w-[40%] lg:w-[15%] justify-start content-center">
         <img
           className="object-contain h-11 w-8 content-center"
           src="src\Pages\Images\User.jpg"
           alt="User"
         />
-        <div className="content-center">
-          <p className="hidden md:block ml-2 font-bold ">{userName}</p>
-          <p className="hidden md:block ml-2 text-gray-500 text-sm text-left">
+        <div className="lg:content-center">
+          <p className=" md:block ml-2 font-bold ">{userName}</p>
+          <p className=" md:block ml-2 text-gray-500 text-sm text-left">
             Status-200
           </p>
         </div>
