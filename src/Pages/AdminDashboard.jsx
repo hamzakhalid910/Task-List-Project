@@ -8,7 +8,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 
 function AdminDashboard() {
   return (
-    <div className="h-[96%] ">
+    <div className="">
       <Header pageName="DashBoard"></Header>
 
       <div className="flex ">

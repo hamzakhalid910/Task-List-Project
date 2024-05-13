@@ -45,7 +45,7 @@ function Menu() {
       </ul>
       <Link to="/dashboard">
         <button
-          className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`flex shadow  lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
             active === "dashboard" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("dashboard")}
@@ -54,7 +54,7 @@ function Menu() {
             <MenuIcon />
           </div>
           {/* Conditional rendering of text based on screen size */}
-          <span className="hidden sm:inline-block">Dashboard</span>
+          <span className="hidden md:block">Dashboard</span>
         </button>
       </Link>
 
@@ -71,7 +71,7 @@ function Menu() {
             <div className="mr-1">
               <UserIcon />
             </div>
-            <span className="hidden sm:inline-block ">Users</span>
+            <span className="hidden md:block ">Users</span>
           </button>
         </Link>
       )}
@@ -88,7 +88,7 @@ function Menu() {
           <div className="mr-1">
             <TaskIcon />
           </div>
-          <span className="hidden sm:inline-block">Task</span>
+          <span className="hidden md:inline-block">Task</span>
         </button>
       </Link>
 
@@ -104,7 +104,7 @@ function Menu() {
           <div className="mr-1">
             <SettingIcon />
           </div>
-          <span className="hidden sm:inline-block">Setting</span>
+          <span className="hidden md:inline-block">Setting</span>
         </button>
       </Link>
 
@@ -115,7 +115,7 @@ function Menu() {
         <div className="mr-1">
           <LogoutIcon />
         </div>
-        <span className="hidden sm:inline-block">Log Out</span>
+        <span className="hidden md:inline-block">Log Out</span>
       </button>
     </div>
   );

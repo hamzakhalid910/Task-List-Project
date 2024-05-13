@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -12,28 +13,30 @@ function UserList() {
   const [showDropdownIndex, setShowDropdownIndex] = useState(null);
   const [users, setUser] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(8);
+  const [usersPerPage] = useState(7);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
+    setIsLoading(true);
     try {
       const userResponse = await axios.get("http://localhost:3000/api/users");
-      setUser(userResponse.data);
+      setTimeout(() => {
+        setUser(userResponse.data);
+        setIsLoading(false);
+      }, 500);
+      // setUser(userResponse.data);
     } catch (error) {
       console.log("Error fetching data:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500); // Delay hiding loader for 1 second
     }
   };
-
-  // const calculateDaysLeft = (startDate, endDate) => {
-  //   const start = new Date(startDate);
-  //   const end = new Date(endDate);
-  //   const diffInMs = end - start;
-  //   const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-  //   return diffInDays;
-  // };
 
   const handleImageClick = (index) => {
     setShowDropdownIndex(index === showDropdownIndex ? null : index);
@@ -74,76 +77,83 @@ function UserList() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="w-[85%]  bg-gray-100 x-4 py-2 flex ">
-      <div className="flex-wrap mx-auto my-auto w-[94%] bg-white h-[90%] rounded-xl border-2 border-blue-100">
-        <h1 className="text-left font-bold py-2 ml-5 text-xl">Online User</h1>
-        <div className="flex w-[100%] font-semibold text-left ml-4">
-          <div className="flex w-[25%] py-2 items-center ">User ID</div>
-          <div className="flex w-[25%] py-2 items-center ">User Name</div>
-          <div className="flex w-[25%] py-2 items-center">User Email</div>
-          <div className="flex w-[25%] py-2 items-center">User Role</div>
-        </div>
-        <div className="bg-green w-[100%] rounded-md ">
-          {currentUsers.map((users, index) => (
-            <div key={index} className="flex w-[100%] rounded-md ml-4">
-              <div className=" flex border w-[25%] items-center py-2">
-                {users._id}
-              </div>
-              <div className="underline border text-blue-500 flex w-[25%] items-center py-2.5 ">
-                {users.fullname}{" "}
-              </div>
-              <div className=" flex w-[25%]  items-center py-2">
-                {users.email}
-              </div>
-              <div className=" flex w-[25%]  items-center py-2 ">
-                <div className="flex w-[25%]  items-center py-2 ">
-                  {users.role}
+    <>
+      <div className="w-[85%] h-screen bg-gray-100 x-4 py-2 flex ">
+        {isLoading && (
+          <div className="absolute top-[50%] left-[50%] transform translate(-50%, -50%)">
+            <CircularProgress />
+          </div>
+        )}
+        <div className="flex-wrap mx-auto my-auto w-[94%] bg-white h-[90%] rounded-xl border-2 border-blue-100">
+          <h1 className="text-left font-bold py-2 ml-5 text-xl">Online User</h1>
+          <div className="flex w-[100%] font-semibold text-left ml-4">
+            <div className="flex w-[25%] py-2 items-center ">User ID</div>
+            <div className="flex w-[25%] py-2 items-center ">User Name</div>
+            <div className="flex w-[25%] py-2 items-center">User Email</div>
+            <div className="flex w-[25%] py-2 items-center">User Role</div>
+          </div>
+          <div className="bg-green w-[100%] rounded-md ">
+            {currentUsers.map((users, index) => (
+              <div key={index} className="flex w-[100%] rounded-md ml-4">
+                <div className=" flex border-b w-[25%] items-center py-2">
+                  {users._id}
                 </div>
+                <div className="underline border-b text-blue-500 flex w-[25%] items-center py-2.5 ">
+                  {users.fullname}{" "}
+                </div>
+                <div className=" flex w-[25%] border-b items-center py-2">
+                  {users.email}
+                </div>
+                <div className=" flex w-[25%] border-b items-center py-2 ">
+                  <div className="flex w-[25%]  items-center py-2 ">
+                    {users.role}
+                  </div>
 
-                <div className=" flex w-[25%] justify-center   relative">
-                  <img
-                    src="src\Pages\Images\Options.png"
-                    alt="Image"
-                    className="ml-6 w-6 h-6"
-                    onClick={() => {
-                      handleImageClick(index);
-                    }}
-                  />
-                  {showDropdownIndex === index && (
-                    <div className="absolute ml-28 w-25 bg-white border border-gray-300 rounded-md shadow-lg z-10">
-                      <button
-                        className="block w-full py-2 text-left px-4 hover:bg-gray-100"
-                        onClick={() => handleActionClick("delete", users._id)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="block w-full py-2 text-left px-4 hover:bg-gray-100"
-                        onClick={() => handleActionClick("view", index)}
-                      >
-                        View
-                      </button>
-                      <button
-                        className="block w-full py-2 text-left px-4 hover:bg-gray-100"
-                        onClick={() => handleActionClick("edit", index)}
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  )}
+                  <div className=" flex w-[25%] justify-center   relative">
+                    <img
+                      src="src\Pages\Images\Options.png"
+                      alt="Image"
+                      className="ml-6 w-6 h-6"
+                      onClick={() => {
+                        handleImageClick(index);
+                      }}
+                    />
+                    {showDropdownIndex === index && (
+                      <div className="absolute ml-28 w-25 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+                        <button
+                          className="block w-full py-2 text-left px-4 hover:bg-gray-100"
+                          onClick={() => handleActionClick("delete", users._id)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="block w-full py-2 text-left px-4 hover:bg-gray-100"
+                          onClick={() => handleActionClick("view", index)}
+                        >
+                          View
+                        </button>
+                        <button
+                          className="block w-full py-2 text-left px-4 hover:bg-gray-100"
+                          onClick={() => handleActionClick("edit", index)}
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-          <br />
-          <div className="flex ">
-            <p className="w-[32%] text-left text-gray-500 ml-8 text-sm">
-              Rows per page 10
-            </p>
-            <div className="flex w-[32%]  justify-center">
-              <ul className="flex">
-                {[...Array(Math.ceil(users.length / usersPerPage)).keys()].map(
-                  (number) => (
+            ))}
+            <br />
+            <div className="flex ">
+              <p className="w-[32%] text-left text-gray-500 ml-8 text-sm">
+                Rows per page 10
+              </p>
+              <div className="flex w-[32%]  justify-center">
+                <ul className="flex">
+                  {[
+                    ...Array(Math.ceil(users.length / usersPerPage)).keys(),
+                  ].map((number) => (
                     <li key={number}>
                       <button
                         onClick={() => paginate(number + 1)}
@@ -156,19 +166,19 @@ function UserList() {
                         {number + 1}
                       </button>
                     </li>
-                  )
-                )}
-              </ul>
-            </div>
-            <div className="w-[32%]">
-              <p className=" text-rght text-gray-500 ml-4 text-sm">
-                Go to page _____
-              </p>
+                  ))}
+                </ul>
+              </div>
+              <div className="w-[32%]">
+                <p className=" text-rght text-gray-500 ml-4 text-sm">
+                  Go to page _____
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

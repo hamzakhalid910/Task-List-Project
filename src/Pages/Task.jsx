@@ -100,7 +100,11 @@ function Task() {
         console.log(response.data);
         // Filter tasks based on logged-in user's ID
         console.log("User Role:", getUserRoleFromToken());
-        setUserRole(getUserRoleFromToken());
+        setTimeout(() => {
+          const userRole = getUserRoleFromToken();
+          setUserRole(userRole);
+        }, 2000);
+      //  setUserRole(getUserRoleFromToken());
         console.log("New Role:", userRole);
         if (userRole === "user") {
           const filteredTasks = response.data.filter(
@@ -115,7 +119,7 @@ function Task() {
       .catch((error) => {
         console.error("Error fetching tasks:", error);
       });
-  }, [loggedInUserId]);
+  }, [userRole]);
 
   // Function to filter tasks based on search query and dates
   const filteredTasks = tasks.filter((task) => {
@@ -140,9 +144,9 @@ function Task() {
       <Header pageName="Task" />
       <div className="flex h-[96%]">
         <Menu />
-        <div className="w-[85%]  bg-gray-100">
-          <div className="flex mt-12 ml-8  ">
-            <div className="border-green-500 w-[20%] ">
+        <div className="w-[85%] bg-gray-100">
+          <div className="md:flex mt-8 lg:mt-12 ml-2 lg:ml-8  ">
+            <div className="w-[70%] md:w-[20%] ">
               <h1 className="ml-8 font-semibold text-lg text-left content-center py-2">
                 Start date:
               </h1>
@@ -157,13 +161,13 @@ function Task() {
               </div>
             </div>
 
-            <div className=" border-green-500 w-[20%]">
+            <div className=" w-[70%] md:w-[20%]">
               <div>
                 <h2 className="ml-8 font-semibold text-lg text-left content-center py-2">
                   End date:
                 </h2>
               </div>
-              <div className="w-[90%]">
+              <div className="w-[90%] ">
                 <input
                   className="w-[100%] ml-8 h-12 rounded-md border-2 border-blue-200 p-2"
                   type="date"
@@ -175,14 +179,14 @@ function Task() {
             </div>
 
             {/* Add Task Modal */}
-            <div className="flex w-[60%] ">
-              <div className=" w-[45%]"></div>
+            <div className="flex w-[60%]">
+              <div className="w-[45%]"></div>
               <button
-                className="mx-auto"
+                className="lg:mx-auto"
                 onClick={() => setShowAddModal(!showAddModal)}
               >
                 <img
-                  className="object-contain h-12 w-32 "
+                  className="object-contain h-20 lg:h-12 w-[100%] md:w-[80%]"
                   src="src\Pages\Images\AddTask.png"
                   alt="Add Task"
                 />
@@ -190,43 +194,45 @@ function Task() {
             </div>
           </div>
 
-          <div className="ml-8 ">
+          <div className="lg:ml-8 ">
             <h3 className="font-semibold text-left mt-8 ml-8 text-lg ">
               Enter Title:
             </h3>
-            <div className="flex border-1 ml-8 border-blue-700 relative">
+            <div className="flex  ml-8  relative">
               <img
                 className="absolute mt-7 ml-1 w-6 h-6"
                 src="src\Pages\Images\Search.png"
                 alt="Search Icon"
               />
               <input
-                className="rounded rounded-l-md rounded-r-none pl-10 w-[27.5%] h-12 mt-4 p-2"
+                className="rounded rounded-l-md rounded-r-none pl-10 w-[70%] lg:w-[27.5%] h-12 mt-4 p-2 border-2 border-blue-200 border-r-none"
                 type="search"
                 placeholder="Search"
                 value={searchQuery}
                 onChange={handleSearchChange}
                 required
               />
-              <button className="bg-[#4BCBEB] w-[11.5%] rounded-l-none rounded-r-md h-12 mt-4">
+              <button className="bg-[#4BCBEB] w-[22%] lg:w-[11.5%] rounded-l-none rounded-r-md h-12 mt-4">
                 Search
               </button>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-between px-8 mt-4 space-x-4">
+          <div className="flex flex-wrap justify-center lg:justify-between lg:px-8 mt-4 lg:space-x-4">
             {filteredTasks.map((task, index) => (
               <div
                 key={index}
-                className="bg-white h-96 mt-6 ml-8 mb-6 mx-2 w-[96%] lg:w-[30%] border-2 border-sky-200 rounded-xl"
+                className="bg-white h-96 mt-6  lg:ml-8 mb-6 mx-4 lg:mx-2 w-[96%] lg:w-[30%] border-2 border-sky-200 rounded-xl"
               >
                 <div
                   style={{ backgroundColor: randomColor() }}
                   className="p-4 rounded-t-xl"
                 ></div>
                 <div className="flex ">
-                  <h4 className="font-bold p-2 w-[90%] text-left">
-                    Title: {task.title}
+                  <h4 className="font-gray-200 px-2 w-[90%] text-left">
+                    Title: 
+                    <p className="mt-2 text-left "> {task.title}</p>
+
                   </h4>
                   <div className="relative">
                     <button
@@ -249,7 +255,6 @@ function Task() {
                     )}
                   </div>
                 </div>
-                <p className="mt-2 text-left px-2">Task {index + 1}</p>
                 <h5 className="font-bold mt-2 text-left px-2">Description:</h5>
                 <p className="mt-2 text-left px-2"> {task.description}</p>
                 <h6 className="font-bold mt-2 text-left px-2">Attachment</h6>
@@ -260,13 +265,15 @@ function Task() {
                     alt="Image"
                   />
                 </div>
-                <div className="flex">
-                  <h7 className="font-bold px-2 ">Start Date:</h7>
-                  <h7 className="font-bold ml-44">End Date:</h7>
-                </div>
-                <div className="flex">
-                  <p className="ml-2">{formatDate(task.startDate)}</p>
-                  <p className="ml-44">{formatDate(task.endDate)}</p>
+                <div className="flex w-[100%]">
+                  <div className=" w-[50%] text-left pl-2">
+                    <h7 className="font-bold">Start Date:</h7>
+                    <p className="">{formatDate(task.startDate)}</p>
+                  </div>
+                  <div className="w-[50%] text-right pr-2">
+                    <h7 className="font-bold px-3">End Date:</h7>
+                    <p className="">{formatDate(task.endDate)}</p>
+                  </div>
                 </div>
               </div>
             ))}
