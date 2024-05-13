@@ -57,7 +57,9 @@ export const updateTask = async (req, res) => {
     if (task) {
       task.title = req.body.title || task.title;
       task.description = req.body.description || task.description;
-      // Update other task properties here
+      // task.attachment = req.body.attachment || task.attachment;
+      // task.startDate = req.body.startDate || task.startDate;
+      // task.endDate = req.body.endDate || task.endDate;
 
       const updatedTask = await task.save();
       res.json(updatedTask);
@@ -65,9 +67,10 @@ export const updateTask = async (req, res) => {
       res.status(404).json({ message: "Task not found" });
     }
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ message: "What i can say" });
   }
 };
+
 
 // Delete a task by ID
 export const deleteTask = async (req, res) => {

@@ -19,6 +19,22 @@ function Task() {
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
+  function randomColor() {
+    // Generate random values for red, green, and blue components
+    var red = Math.floor(Math.random() * 256);
+    var green = Math.floor(Math.random() * 256);
+    var blue = Math.floor(Math.random() * 256);
+
+    // Convert the values to hexadecimal and format them
+    var colorHex =
+      "#" +
+      red.toString(16).padStart(2, "0") +
+      green.toString(16).padStart(2, "0") +
+      blue.toString(16).padStart(2, "0");
+
+    return colorHex;
+  }
+
   const getUserRoleFromToken = () => {
     try {
       const token = localStorage.getItem("jsonwebtoken");
@@ -124,8 +140,8 @@ function Task() {
       <Header pageName="Task" />
       <div className="flex h-[96%]">
         <Menu />
-        <div className="w-[85%] border-2 bg-gray-100">
-          <div className="flex mt-12 ml-8 border-2 ">
+        <div className="w-[85%]  bg-gray-100">
+          <div className="flex mt-12 ml-8  ">
             <div className="border-green-500 w-[20%] ">
               <h1 className="ml-8 font-semibold text-lg text-left content-center py-2">
                 Start date:
@@ -149,7 +165,7 @@ function Task() {
               </div>
               <div className="w-[90%]">
                 <input
-                  className="ml-8 h-12 rounded-md border-2 border-blue-200 p-2"
+                  className="w-[100%] ml-8 h-12 rounded-md border-2 border-blue-200 p-2"
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
@@ -159,13 +175,14 @@ function Task() {
             </div>
 
             {/* Add Task Modal */}
-            <div className="flex w-[30%] ">
+            <div className="flex w-[60%] ">
+              <div className=" w-[45%]"></div>
               <button
                 className="mx-auto"
                 onClick={() => setShowAddModal(!showAddModal)}
               >
                 <img
-                  className="object-contain h-12 w-32 ml-18"
+                  className="object-contain h-12 w-32 "
                   src="src\Pages\Images\AddTask.png"
                   alt="Add Task"
                 />
@@ -174,17 +191,17 @@ function Task() {
           </div>
 
           <div className="ml-8 ">
-            <h3 className="font-semibold text-left mt-8 text-lg ">
+            <h3 className="font-semibold text-left mt-8 ml-8 text-lg ">
               Enter Title:
             </h3>
-            <div className="flex border-1 border-blue-700 relative">
+            <div className="flex border-1 ml-8 border-blue-700 relative">
               <img
                 className="absolute mt-7 ml-1 w-6 h-6"
                 src="src\Pages\Images\Search.png"
                 alt="Search Icon"
               />
               <input
-                className="rounded rounded-l-md rounded-r-none pl-10 w-[34%] h-12 mt-4 p-2"
+                className="rounded rounded-l-md rounded-r-none pl-10 w-[27.5%] h-12 mt-4 p-2"
                 type="search"
                 placeholder="Search"
                 value={searchQuery}
@@ -201,9 +218,12 @@ function Task() {
             {filteredTasks.map((task, index) => (
               <div
                 key={index}
-                className="bg-white h-96 mt-6 mx-2 w-[96%] lg:w-[31%] border-2 border-sky-200 rounded-xl"
+                className="bg-white h-96 mt-6 ml-8 mb-6 mx-2 w-[96%] lg:w-[30%] border-2 border-sky-200 rounded-xl"
               >
-                <div className="p-4 bg-orange-400 rounded-t-xl"></div>
+                <div
+                  style={{ backgroundColor: randomColor() }}
+                  className="p-4 rounded-t-xl"
+                ></div>
                 <div className="flex ">
                   <h4 className="font-bold p-2 w-[90%] text-left">
                     Title: {task.title}
