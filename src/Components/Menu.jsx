@@ -45,7 +45,7 @@ function Menu() {
       </ul>
       <Link to="/dashboard">
         <button
-          className={`flex shadow  lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-4 rounded-md py-2 hover:bg-sky-200 ${
             active === "dashboard" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("dashboard")}

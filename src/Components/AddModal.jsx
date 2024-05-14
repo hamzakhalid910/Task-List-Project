@@ -67,6 +67,7 @@ function AddModal({ onSubmit }) {
 
   const crossDisplay = () => {
     setCross(!cross);
+    // setCross(!cross);
   };
 
   return (
