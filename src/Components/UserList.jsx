@@ -13,30 +13,31 @@ function UserList() {
   const [showDropdownIndex, setShowDropdownIndex] = useState(null);
   const [users, setUser] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(7);
-  const [isLoading, setIsLoading] = useState(false);
+  const [usersPerPage] = useState(8);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchUsers();
-    setIsLoading(false);
   }, [users]);
 
   const fetchUsers = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const userResponse = await axios.get("http://localhost:3000/api/users");
       setTimeout(() => {
         setUser(userResponse.data);
         setIsLoading(false);
-      }, 500);
+      }, 1000);
+
       // setUser(userResponse.data);
     } catch (error) {
       console.log("Error fetching data:", error);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500); // Delay hiding loader for 1 second
     }
+    // finally {
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+    //   }, 500); // Delay hiding loader for 1 second
+    // }
   };
 
   const handleImageClick = (index) => {
@@ -79,15 +80,15 @@ function UserList() {
 
   return (
     <>
-      <div className="w-[85%] h-screen bg-gray-100 x-4 py-2 flex ">
+      <div className="w-[85%] h-screen bg-gray-100 x-4 py-2 flex overflow-x-auto">
         {isLoading && (
           <div className="absolute top-[50%] left-[50%] transform translate(-50%, -50%)">
             <CircularProgress />
           </div>
         )}
-        <div className="flex-wrap mx-auto my-auto w-[94%] bg-white h-[90%] rounded-xl border-2 border-blue-100">
+        <div className="flex-wrap mx-auto my-auto w-[94%] bg-white h-[90%] rounded-xl border-2 border-blue-100 overflow-x-auto">
           <h1 className="text-left font-bold py-2 ml-5 text-xl">Online User</h1>
-          <div className="flex w-[100%] font-semibold text-left ml-4">
+          <div className="flex w-[100%] font-semibold text-left ml-4 lg:space-x-0 space-x-48 ">
             <div className="flex w-[25%] py-2 items-center ">User ID</div>
             <div className="flex w-[25%] py-2 items-center ">User Name</div>
             <div className="flex w-[25%] py-2 items-center">User Email</div>
@@ -95,7 +96,10 @@ function UserList() {
           </div>
           <div className="bg-green w-[100%] rounded-md ">
             {currentUsers.map((users, index) => (
-              <div key={index} className="flex w-[100%] rounded-md ml-4">
+              <div
+                key={index}
+                className="flex w-[100%] rounded-md ml-4 lg:space-x-0 space-x-40"
+              >
                 <div className=" flex border-b w-[25%] items-center py-2">
                   {users._id}
                 </div>
@@ -105,7 +109,7 @@ function UserList() {
                 <div className=" flex w-[25%] border-b items-center py-2">
                   {users.email}
                 </div>
-                <div className=" flex w-[25%] border-b items-center py-2 ">
+                <div className=" flex w-[25%] border-b items-center py-2 lg:space-x-0 space-x-10">
                   <div className="flex w-[25%]  items-center py-2 ">
                     {users.role}
                   </div>
@@ -170,7 +174,7 @@ function UserList() {
                   ))}
                 </ul>
               </div>
-              <div className="w-[32%]">
+              <div className="w-[32%] ">
                 <p className=" text-rght text-gray-500 ml-4 text-sm">
                   Go to page _____
                 </p>

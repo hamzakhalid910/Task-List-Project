@@ -9,6 +9,7 @@ function Dashboard() {
   const [loggedInUserId, setLoggedInUserId] = useState("");
   const [tasks, setTasks] = useState([]);
   const [userRole, setUserRole] = useState(null);
+  const [totalTasks, setTotalTasks] = useState(0);
   const [declinedTasks, setDeclinedTasks] = useState(0);
   const [pendingTasks, setPendingTasks] = useState(0);
   const [completedTasks, setCompletedTasks] = useState(0);
@@ -67,6 +68,7 @@ function Dashboard() {
           setTasks(filteredTasks);
           const currentDateTime = new Date();
 
+          setTotalTasks(filteredTasks.length);
           const declinedTasksCount = filteredTasks.filter(
             (task) => new Date(task.endDate) < currentDateTime
           ).length;
@@ -83,6 +85,23 @@ function Dashboard() {
           setCompletedTasks(completedTasksCount);
         } else {
           setTasks(response.data);
+          const currentDateTime = new Date();
+
+          setTotalTasks(tasks.length);
+          const declinedTasksCount = tasks.filter(
+            (task) => new Date(task.endDate) < currentDateTime
+          ).length;
+          console.log("Declined Task:", declinedTasksCount);
+          setDeclinedTasks(declinedTasksCount);
+
+          const pendingTasksCount = tasks.filter(
+            (task) => new Date(task.endDate) > currentDateTime
+          ).length;
+          console.log("Pending Task:", pendingTasksCount);
+          setPendingTasks(pendingTasksCount);
+
+          const completedTasksCount = declinedTasksCount - pendingTasksCount;
+          setCompletedTasks(completedTasksCount);
         }
       })
       .catch((error) => {
@@ -98,7 +117,7 @@ function Dashboard() {
           <div className="w-[90%] py-2 lg:w-[23%] h-28 mx-auto mt-2 font-bold border-1 rounded-md bg-[#F4F2FF]">
             <h1 className="mt-2 px-4 text-left ">Total Task</h1>
             <h2 className="mt-2 text-left px-4 h-10 text-xl text-gray-400 font-poppins">
-              {tasks.length}
+              {totalTasks}
             </h2>
 
             <div class="ml-3 px-4 w-[90%] rounded-sm h-3.5 bg-[#4BCBEB]"></div>
@@ -137,12 +156,17 @@ function Dashboard() {
                 Total Task ratio
               </h1>
               <div className="lg:mx-auto">
-                <Chart />
+                <Chart
+                  totalTasks={totalTasks}
+                  completedTasks={completedTasks}
+                  pendingTasks={pendingTasks}
+                  declinedTasks={declinedTasks}
+                />
               </div>
             </div>
-            <div className="w-[96%]  lg:w-[40%] items-center mt-2 md:mt-10  lg:justify-end ">
+            <div className="lg:flex w-[96%] lg:w-[40%] items-center mt-2 md:mt-10 lg:justify-end ">
               <div className=" justify-center md:justify-end mt-2 lg-mt-0 bg-white rounded-md">
-                <div className="w-[96%]">
+                <div className="w-[96%] ">
                   <BasicDateCalendar />
                 </div>
               </div>

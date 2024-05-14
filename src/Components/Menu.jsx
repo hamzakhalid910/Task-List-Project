@@ -63,7 +63,7 @@ function Menu() {
       {userRole === "admin" && (
         <Link to="/users">
           <button
-            className={`font-blue flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+            className={`font-blue flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-4 rounded-md py-2 hover:bg-sky-200 ${
               active === "users" ? "text-sky-500" : "text-black"
             }`}
             onClick={() => setActive("users")}
@@ -80,7 +80,7 @@ function Menu() {
 
       <Link to="/Task">
         <button
-          className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`flex shadow w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-4 rounded-md py-2 hover:bg-sky-200 ${
             active === "task" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("task")}
@@ -96,7 +96,7 @@ function Menu() {
 
       <Link to="/setting">
         <button
-          className={`flex shadow  w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200 ${
+          className={`flex shadow  w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-4 rounded-md py-2 hover:bg-sky-200 ${
             active === "setting" ? "text-sky-500" : "text-black"
           }`}
           onClick={() => setActive("setting")}
@@ -109,7 +109,7 @@ function Menu() {
       </Link>
 
       <button
-        className="flex shadow  w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-2 rounded-md py-2 hover:bg-sky-200"
+        className="flex shadow  w:[10%] lg:w-[96%] text-left font-bold px-1 lg:px-2 mt-4 rounded-md py-2 hover:bg-sky-200"
         onClick={handleLogout}
       >
         <div className="mr-1">
