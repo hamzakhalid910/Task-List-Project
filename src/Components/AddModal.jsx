@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios"; // Import Axios
 
 function AddModal({ onSubmit }) {
-  const [cross, setCross] = useState(true); // Define the cross state variable
+  const [cross, setCross] = useState(true); // Define the cross state variable\
+  const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -47,12 +48,29 @@ function AddModal({ onSubmit }) {
       }
 
       const updatedFormData = { ...formData, user: userId };
+      console.log("User: ", userId);
 
-      console.log("User in Form:", updatedFormData);
+      console.log("User in Form data:", updatedFormData.user);
+
+      const ImgFormData = new FormData();
+      ImgFormData.append("title", formData.title);
+      ImgFormData.append("description", updatedFormData.description);
+      ImgFormData.append("startDate", updatedFormData.startDate);
+      ImgFormData.append("endDate", updatedFormData.endDate);
+
+      if (file) {
+        ImgFormData.append("file", file); // Append the file to form data
+      }
+      ImgFormData.append("user", updatedFormData.user);
+
+      console.log("file", file);
+      console.log("Form Data ia here ::: ", ImgFormData);
+      console.log("user in New Form Data:", ImgFormData.user);
+      console.log("title in New Form Data:", ImgFormData.title);
 
       const response = await axios.post(
         "http://localhost:3000/api/tasks/addtask",
-        updatedFormData
+        ImgFormData
       );
       console.log("Task added successfully:", response.data);
       onSubmit(updatedFormData);
@@ -150,8 +168,8 @@ function AddModal({ onSubmit }) {
               <input
                 type="file"
                 name="attachment"
-                value={formData.attachment}
-                onChange={handleChange}
+                // value={formData.attachment}
+                onChange={(e) => setFile(e.target.files[0])}
                 className="content-center ml-18 w-full h-14 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">

@@ -19,6 +19,7 @@ connectDB();
 // Middleware
 // Apply CORS middleware
 // app.use(corsMiddleware);
+app.use(corsMiddleware);
 
 app.use(cors());
 app.use(express.json());
@@ -45,10 +46,10 @@ app.use("/api/notifications", notificationRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
-app.post("/upload", upload.single("file"), function (req, res, next) {
-  // req.file contains the uploaded file
-  res.send("File uploaded successfully!");
-});
+// app.post("/upload", upload.single("file"), function (req, res, next) {
+//   // req.file contains the uploaded file
+//   res.send("File uploaded successfully!");
+// });
 
 // Start server
 app.listen(PORT, () => {

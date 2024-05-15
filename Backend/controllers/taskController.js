@@ -30,7 +30,7 @@ export const createTask = async (req, res) => {
   const { title, description, startDate, endDate, user } = req.body; // Destructure user from req.body
 
   if (!title || !description || !startDate || !endDate || !user) {
-    return res.status(400).json({ message: "All fields are required, including user" });
+    return res.status(400).json({ message: "All fields are required." });
   }
 
   try {
@@ -39,6 +39,7 @@ export const createTask = async (req, res) => {
       description,
       startDate,
       endDate,
+      attachment:req.file?.filename, 
       user // Associate the task with the user
     });
     const newTask = await task.save();
