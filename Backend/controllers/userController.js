@@ -37,12 +37,28 @@ export const getUserById = async (req, res) => {
   }
 };
 
+
+//User by Email
+
+export const getUserByEmail = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // Update a user by ID
 export const updateUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user) {
-      user.username = req.body.username || user.username;
+      user.fullname = req.body.fullname || user.fullname;
       user.email = req.body.email || user.email;
       // Update other user properties here
 

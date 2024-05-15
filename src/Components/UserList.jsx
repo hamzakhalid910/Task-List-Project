@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import { UserEditModal } from "./UserEditModal";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -14,15 +15,22 @@ function UserList() {
   const [users, setUser] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(7);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+
+  // const handleClose = (crossState) => {
+  //   console.log("Cross state from modal:", crossState);
+  //   // Handle cross state change here if needed
+  // };
 
   useEffect(() => {
     fetchUsers();
-    setIsLoading(false);
+    // setIsLoading(false);
   }, [users]);
 
   const fetchUsers = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const userResponse = await axios.get("http://localhost:3000/api/users");
       setTimeout(() => {
@@ -47,22 +55,27 @@ function UserList() {
     switch (action) {
       case "delete":
         console.log("Delete user at index:", user);
+        setIsLoading(true);
         axios
           .delete(`http://localhost:3000/api/users/${user}`)
           .then((response) => {
             console.log("user deleted:", response.data);
+
             setShowDropdownIndex(!showDropdownIndex);
+            setIsLoading(false);
           })
           .catch((error) => {
             console.log("Error deleting user:", error);
           });
 
         break;
-      case "view":
-        console.log("View user at index:", user);
-        break;
+
       case "edit":
+        setShowDropdownIndex(!showDropdownIndex);
+        setShowEditUserModal(!showEditUserModal);
         console.log("Edit user at index:", user);
+        console.log("modal value", showEditUserModal);
+
         break;
       default:
         break;
@@ -127,15 +140,13 @@ function UserList() {
                         >
                           Delete
                         </button>
+
                         <button
                           className="block w-full py-2 text-left px-4 hover:bg-gray-100"
-                          onClick={() => handleActionClick("view", index)}
-                        >
-                          View
-                        </button>
-                        <button
-                          className="block w-full py-2 text-left px-4 hover:bg-gray-100"
-                          onClick={() => handleActionClick("edit", index)}
+                          onClick={() => {
+                            setSelectedUserId(users._id);
+                            handleActionClick("edit", users._id);
+                          }}
                         >
                           Edit
                         </button>
@@ -177,6 +188,7 @@ function UserList() {
               </div>
             </div>
           </div>
+          {showEditUserModal && <UserEditModal UserId={selectedUserId} />}
         </div>
       </div>
     </>

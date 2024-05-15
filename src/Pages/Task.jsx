@@ -20,10 +20,26 @@ function Task() {
   const [userRole, setUserRole] = useState(null);
 
   function randomColor() {
-    // Generate random values for red, green, and blue components
-    var red = Math.floor(Math.random() * 256);
-    var green = Math.floor(Math.random() * 256);
-    var blue = Math.floor(Math.random() * 256);
+    // Define arrays for the restricted colors
+    var colors = [
+      // Red
+      [255, 0, 0],
+      // Sky Blue
+      [135, 206, 235],
+      // Green
+      [0, 128, 0],
+      // Orange
+      [255, 165, 0],
+    ];
+
+    // Choose a random color from the predefined array
+    var randomIndex = Math.floor(Math.random() * colors.length);
+    var selectedColor = colors[randomIndex];
+
+    // Extract red, green, and blue values
+    var red = selectedColor[0];
+    var green = selectedColor[1];
+    var blue = selectedColor[2];
 
     // Convert the values to hexadecimal and format them
     var colorHex =
@@ -224,7 +240,7 @@ function Task() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center lg:justify-between lg:px-8 mt-4 lg:space-x-4">
+          <div className="flex flex-wrap justify-center lg:justify-start lg:px-8 mt-4 lg:space-x-10">
             {filteredTasks.map((task, index) => (
               <div
                 key={index}
@@ -234,12 +250,14 @@ function Task() {
                   style={{ backgroundColor: randomColor() }}
                   className="p-4 rounded-t-xl"
                 ></div>
-                <div className="flex ">
-                  <h4 className="font-gray-200 px-2 w-[90%] text-left">
-                    Title:
-                    <p className="mt-2 text-left "> {task.title}</p>
-                  </h4>
-                  <div className="relative">
+                <div className=" flex w-[100%]">
+                  <div className="w-[90%]">
+                    <h4 className=" font-semibold font-gray-200 px-2 w-[90%] text-left">
+                      Title:
+                    </h4>
+                    <p className="mt-2 w-[90%] px-2 text-left "> {task.title}</p>
+                  </div>
+                  <div className="relative justify-end w-[10%]">
                     <button
                       className="justify-end"
                       onClick={() => {

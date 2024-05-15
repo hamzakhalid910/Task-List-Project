@@ -65,25 +65,26 @@ function Dashboard() {
           );
           console.log("Length of Filtered Task:", filteredTasks.length);
           setTasks(filteredTasks);
-          const currentDateTime = new Date();
-
-          const declinedTasksCount = filteredTasks.filter(
-            (task) => new Date(task.endDate) < currentDateTime
-          ).length;
-          console.log("Declined Task:", declinedTasksCount);
-          setDeclinedTasks(declinedTasksCount);
-
-          const pendingTasksCount = filteredTasks.filter(
-            (task) => new Date(task.endDate) > currentDateTime
-          ).length;
-          console.log("Pending Task:", pendingTasksCount);
-          setPendingTasks(pendingTasksCount);
-
-          const completedTasksCount = declinedTasksCount - pendingTasksCount;
-          setCompletedTasks(completedTasksCount);
         } else {
           setTasks(response.data);
         }
+
+        const currentDateTime = new Date();
+
+        const declinedTasksCount = tasks.filter(
+          (task) => new Date(task.endDate) < currentDateTime
+        ).length;
+        console.log("Declined Task:", declinedTasksCount);
+        setDeclinedTasks(declinedTasksCount);
+
+        const pendingTasksCount = tasks.filter(
+          (task) => new Date(task.endDate) > currentDateTime
+        ).length;
+        console.log("Pending Task:", pendingTasksCount);
+        setPendingTasks(pendingTasksCount);
+
+        const completedTasksCount = declinedTasksCount - pendingTasksCount;
+        setCompletedTasks(completedTasksCount);
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
