@@ -1,5 +1,6 @@
 import React from "react";
-
+import { NotificationIcon } from "./NotificationsIcon";
+import { NotificationsDot } from "./NotificationsDot";
 import Header from "./Header";
 import Menu from "./Menu";
 
@@ -19,10 +20,8 @@ function NotificationsList() {
           </h1>
         </div>
         <div className=" mt-2 flex">
-          <img
-            className="w-[4%] h-[28%]  mx-12 mt-2"
-            src="src\Pages\Images\Notification.png"
-          ></img>
+          <NotificationsDot />
+          <NotificationIcon />
           <div>
             <p className=" text-lg text-black-900 mt-1 flex font-semibold">
               Pending Task
@@ -34,10 +33,9 @@ function NotificationsList() {
           </div>
         </div>
         <div className=" mt-2 flex">
-          <img
-            className="w-[4%] h-[28%]  mx-12 mt-2"
-            src="src\Pages\Images\Notification.png"
-          ></img>
+          <NotificationsDot />
+
+          <NotificationIcon />
           <div>
             <p className=" text-lg text-black-900 mt-1 flex font-semibold">
               Due Task Date
@@ -49,10 +47,9 @@ function NotificationsList() {
           </div>
         </div>
         <div className=" mt-2 flex">
-          <img
-            className="w-[4%] h-[28%]  mx-12 mt-2"
-            src="src\Pages\Images\Notification.png"
-          ></img>
+          <NotificationsDot />
+
+          <NotificationIcon />
           <div>
             <p className=" text-lg text-black-900 mt-1 flex font-semibold">
               Pending Task
@@ -69,11 +66,8 @@ function NotificationsList() {
               Yesterday
             </h1>
           </div>
-          <div className=" mt-2 flex">
-            <img
-              className="w-[4%] h-[28%]  mx-12 mt-2"
-              src="src\Pages\Images\Notification.png"
-            ></img>
+          <div className=" mt-2 ml-10 flex">
+            <NotificationIcon />
             <div>
               <p className=" text-lg text-black-900 mt-1 flex font-semibold">
                 Pending Task
@@ -84,11 +78,8 @@ function NotificationsList() {
               </p>
             </div>
           </div>
-          <div className=" mt-2 flex">
-            <img
-              className="w-[4%] h-[28%]  mx-12 mt-2"
-              src="src\Pages\Images\Notification.png"
-            ></img>
+          <div className=" mt-2 ml-10 flex">
+            <NotificationIcon />
             <div>
               <p className=" text-lg text-black-900 mt-1 flex font-semibold">
                 Pending Task

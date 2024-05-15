@@ -9,13 +9,18 @@ import {
 } from "chart.js";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-function Chart() {
+function Chart({ completedTasks, totalTasks, pendingTasks, declinedTasks }) {
   const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    labels: [
+      "Total Tasks",
+      "Completed Tasks",
+      "Pending Tasks",
+      "Declined Tasks",
+    ],
     datasets: [
       {
         label: "First Chart",
-        data: [343, 2059, 4594, 2700, 1600, 3498],
+        data: [totalTasks, completedTasks, pendingTasks, declinedTasks],
         fill: false,
         borderColor: "rgba(54, 162, 235, 0.6)",
         backgroundColor: "rgba(54, 162, 235, 0.2)",
@@ -88,7 +93,10 @@ function Chart() {
   };
 
   return (
-    <div className="chart-container" style={{ position: "relative", width: "98%", height: "300px" }}>
+    <div
+      className="chart-container"
+      style={{ position: "relative", width: "98%", height: "300px" }}
+    >
       <Line data={data} options={options} />
     </div>
   );

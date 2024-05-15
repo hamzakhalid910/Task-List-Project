@@ -240,24 +240,22 @@ function Task() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center lg:justify-start lg:px-8 mt-4 lg:space-x-10">
+          <div className="flex flex-wrap justify-center lg:justify-start lg:px-8 mt-4 lg:space-x-8">
             {filteredTasks.map((task, index) => (
               <div
                 key={index}
-                className="bg-white h-96 mt-6  lg:ml-8 mb-6 mx-4 lg:mx-2 w-[96%] lg:w-[30%] border-2 border-sky-200 rounded-xl"
+                className="bg-white h-96 mt-6  lg:ml-8 mb-6 mx-4 lg:mx-2 w-[96%] md:w-[45%] lg:w-[30%] border-2 border-sky-200 rounded-xl"
               >
                 <div
                   style={{ backgroundColor: randomColor() }}
                   className="p-4 rounded-t-xl"
                 ></div>
-                <div className=" flex w-[100%]">
-                  <div className="w-[90%]">
-                    <h4 className=" font-semibold font-gray-200 px-2 w-[90%] text-left">
-                      Title:
-                    </h4>
-                    <p className="mt-2 w-[90%] px-2 text-left "> {task.title}</p>
-                  </div>
-                  <div className="relative justify-end w-[10%]">
+                <div className="flex ">
+                  <h4 className="font-semibold font-gray-200 px-2 w-[90%] text-left">
+                    Title:
+                    <p className="mt-2 text-left "> {task.title}</p>
+                  </h4>
+                  <div className="relative">
                     <button
                       className="justify-end"
                       onClick={() => {
@@ -283,12 +281,12 @@ function Task() {
                 <h6 className="font-bold mt-2 text-left px-2">Attachment</h6>
                 <div className="flex justify-center items-center border-gray-400 rounded">
                   <img
-                    className=" border-gray-400 rounded w-60 h-28"
+                    className=" border-gray-400 rounded w-60 h-28 mt-2"
                     src="public\assets\image 7.png"
                     alt="Image"
                   />
                 </div>
-                <div className="flex w-[100%]">
+                <div className="flex w-[100%] mt-2">
                   <div className=" w-[50%] text-left pl-2">
                     <h7 className="font-bold">Start Date:</h7>
                     <p className="">{formatDate(task.startDate)}</p>
