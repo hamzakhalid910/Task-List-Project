@@ -39,9 +39,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// app.use("/api/users", userRoutes);
-// app.use("/api/tasks", taskRoutes);
-// app.use("/api/notifications", notificationRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 app.use("/uploads", express.static("uploads"));
 

@@ -240,11 +240,11 @@ function Task() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center lg:justify-start lg:px-8 mt-4 lg:space-x-8">
+          <div className="flex flex-wrap justify-center lg:justify-start lg:pl-8 mt-4 lg:space-x-8">
             {filteredTasks.map((task, index) => (
               <div
                 key={index}
-                className="bg-white h-96 mt-6  lg:ml-8 mb-6 mx-4 lg:mx-2 w-[96%] md:w-[45%] lg:w-[30%] border-2 border-sky-200 rounded-xl"
+                className="bg-white h-96 mt-6  lg:ml-8 mb-6 mx-4 lg:mx-0 w-[96%] md:w-[45%] lg:w-[30%] border-2 border-sky-200 rounded-xl"
               >
                 <div
                   style={{ backgroundColor: randomColor() }}

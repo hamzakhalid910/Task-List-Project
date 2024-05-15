@@ -16,6 +16,8 @@ function UserList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(8);
   const [isLoading, setIsLoading] = useState(true);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
     fetchUsers();

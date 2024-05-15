@@ -57,9 +57,9 @@ export const updateTask = async (req, res) => {
     if (task) {
       task.title = req.body.title || task.title;
       task.description = req.body.description || task.description;
-      // task.attachment = req.body.attachment || task.attachment;
-      // task.startDate = req.body.startDate || task.startDate;
-      // task.endDate = req.body.endDate || task.endDate;
+      task.attachment = req.body.attachment || task.attachment;
+      task.startDate = req.body.startDate || task.startDate;
+      task.endDate = req.body.endDate || task.endDate;
 
       const updatedTask = await task.save();
       res.json(updatedTask);
