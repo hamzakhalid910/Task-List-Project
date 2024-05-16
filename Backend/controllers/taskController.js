@@ -29,6 +29,7 @@ export const getTaskById = async (req, res) => {
 export const createTask = async (req, res) => {
   const { title, description, startDate, endDate, user } = req.body; // Destructure user from req.body
 
+  console.log("Here is ", title, description, startDate, endDate, user);
   if (!title || !description || !startDate || !endDate || !user) {
     return res.status(400).json({ message: "All fields are required." });
   }
@@ -39,8 +40,8 @@ export const createTask = async (req, res) => {
       description,
       startDate,
       endDate,
-      attachment:req.file?.filename, 
-      user // Associate the task with the user
+      attachment: req.file?.filename || "no image",
+      user, // Associate the task with the user
     });
     const newTask = await task.save();
     res.status(201).json(newTask);
@@ -50,7 +51,6 @@ export const createTask = async (req, res) => {
   }
 };
 
-
 // Update a task by ID
 export const updateTask = async (req, res) => {
   try {
@@ -58,7 +58,7 @@ export const updateTask = async (req, res) => {
     if (task) {
       task.title = req.body.title || task.title;
       task.description = req.body.description || task.description;
-      task.attachment = req.body.attachment || task.attachment;
+      // task.attachment = req.body.attachment || task.attachment;
       task.startDate = req.body.startDate || task.startDate;
       task.endDate = req.body.endDate || task.endDate;
 
@@ -72,25 +72,24 @@ export const updateTask = async (req, res) => {
   }
 };
 
-
 // Delete a task by ID
 export const deleteTask = async (req, res) => {
   try {
     const taskId = req.params.id;
-    
+
     // Check if the task exists
     const task = await Task.findById(taskId);
     if (!task) {
-      return res.status(404).json({ error: 'Task not found' });
+      return res.status(404).json({ error: "Task not found" });
     }
-    
+
     // Delete the task
     await Task.findByIdAndDelete(taskId);
-    
+
     // Respond with success message
-    res.status(200).json({ message: 'Task deleted successfully' });
+    res.status(200).json({ message: "Task deleted successfully" });
   } catch (error) {
-    console.error('Error deleting task:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error deleting task:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };

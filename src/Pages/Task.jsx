@@ -271,6 +271,7 @@ function Task() {
                     {showOptions && selectedTaskId === task._id && (
                       <TaskOptions
                         showOptions={showOptions}
+                        setShowOptions={setShowOptions}
                         taskId={task._id}
                       />
                     )}
@@ -280,9 +281,10 @@ function Task() {
                 <p className="mt-2 text-left px-2"> {task.description}</p>
                 <h6 className="font-bold mt-2 text-left px-2">Attachment</h6>
                 <div className="flex justify-center items-center border-gray-400 rounded">
+                  {console.log("Image attachemnet", task.attachment)}
                   <img
-                    className=" border-gray-400 rounded w-60 h-28 mt-2"
-                    src="public\assets\image 7.png"
+                    className=" border-blue-200 rounded w-[80%] h-32 mt-2 border-2"
+                    src={"http://localhost:3000/uploads/" + task.attachment}
                     alt="Image"
                   />
                 </div>

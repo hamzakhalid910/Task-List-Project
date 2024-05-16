@@ -7,7 +7,7 @@ function EditTaskModal({ taskId }) {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    attachment: "",
+    // attachment: "",
     startDate: "",
     endDate: "",
   });
@@ -19,23 +19,21 @@ function EditTaskModal({ taskId }) {
       [name]: value,
     }));
   };
-
+  console.log("Edited Data:", formData);
+  console.log("task ID - EditModal:", taskId);
   // console.log("task:", taskId);
 
-  const handleTaskEdit = () => {
+  const handleTaskEdit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
     console.log("task ID - EditModal:", taskId);
+    console.log("Edited Data:", formData);
+
     axios
       .put(`http://localhost:3000/api/tasks/${taskId}`, formData)
       .then((response) => {
         console.log("Edited Task:", response);
-        // setCross(!cross);
-        // const updatedTasks = filteredTasks.filter(
-        //   (task) => task._id !== taskId
-        // );
-        // setFilteredTasks(updatedTasks);
-        // if (selectedTaskId === taskId) {
-        //   setSelectedTaskId(null);
-        // }
+        setCross(!cross);
       })
       .catch((error) => {
         console.error("Error deleting task:", error);

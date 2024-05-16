@@ -19,7 +19,7 @@ const taskSchema = new mongoose.Schema({
   },
   attachment:{
     type: String,
-    required: true,
+    // required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

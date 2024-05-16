@@ -39,45 +39,45 @@ function AddModal({ onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("STrat Try");
       const userId = getUserIdFromToken();
-      console.log("UserID:", userId);
       if (!userId) {
         console.error("User ID not found in token or token is invalid");
         return;
       }
 
       const updatedFormData = { ...formData, user: userId };
-      console.log("User: ", userId);
-
-      console.log("User in Form data:", updatedFormData.user);
-
       const ImgFormData = new FormData();
-      ImgFormData.append("title", formData.title);
+
+      // Append form fields to FormData
+      ImgFormData.append("title", updatedFormData.title);
       ImgFormData.append("description", updatedFormData.description);
       ImgFormData.append("startDate", updatedFormData.startDate);
       ImgFormData.append("endDate", updatedFormData.endDate);
-
-      if (file) {
-        ImgFormData.append("file", file); // Append the file to form data
-      }
       ImgFormData.append("user", updatedFormData.user);
 
-      console.log("file", file);
-      console.log("Form Data ia here ::: ", ImgFormData);
-      console.log("user in New Form Data:", ImgFormData.user);
-      console.log("title in New Form Data:", ImgFormData.title);
+      // Append file if exists
+      if (file) {
+        ImgFormData.append("file", file);
+      }
+      console.log("Here is IMG form Data:::", ImgFormData);
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
 
       const response = await axios.post(
         "http://localhost:3000/api/tasks/addtask",
-        ImgFormData
+        ImgFormData,
+        config
       );
+
       console.log("Task added successfully:", response.data);
       onSubmit(updatedFormData);
-      // onTaskAdded(response.data); // Pass the form data to handleModalSubmit
     } catch (error) {
       console.error(
-        "Error adding taskkk:",
+        "Error adding task:",
         error.response?.data || error.message
       );
     }

@@ -19,9 +19,7 @@ function DeleteTaskModal({ taskId }) {
           (task) => task._id !== taskId
         );
         setFilteredTasks(updatedTasks);
-        // if (selectedTaskId === taskId) {
-        //   setSelectedTaskId(null);
-        // }
+        
       })
       .catch((error) => {
         console.error("Error deleting task:", error);
@@ -32,7 +30,7 @@ function DeleteTaskModal({ taskId }) {
     <>
       {cross && (
         <div className="fixed inset-0 flex items-center justify-center">
-          <div className="fixed inset-0 bg-black opacity-50"></div>
+          <div className="fixed inset-0  bg-black opacity-80"></div>
           <div className="relative bg-white p-8 rounded shadow-lg">
             <div className="absolute top-0 right-0 p-4"></div>
             <p className="text-lg font-bold mb-4">

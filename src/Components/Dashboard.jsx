@@ -72,12 +72,13 @@ function Dashboard() {
 
         const currentDateTime = new Date();
 
-          setTotalTasks(tasks.length);
-          const declinedTasksCount = tasks.filter(
-            (task) => new Date(task.endDate) < currentDateTime
-          ).length;
-          console.log("Declined Task:", declinedTasksCount);
-          setDeclinedTasks(declinedTasksCount);
+        setTotalTasks(tasks.length);
+        console.log("task length:", totalTasks);
+        const declinedTasksCount = tasks.filter(
+          (tasks) => new Date(tasks.endDate) < currentDateTime
+        ).length;
+        console.log("Declined Task:", declinedTasks);
+        setDeclinedTasks(declinedTasksCount);
 
         const pendingTasksCount = tasks.filter(
           (task) => new Date(task.endDate) > currentDateTime
@@ -85,10 +86,10 @@ function Dashboard() {
         console.log("Pending Task:", pendingTasksCount);
         setPendingTasks(pendingTasksCount);
 
-          const completedTasksCount = declinedTasksCount - pendingTasksCount;
-          setCompletedTasks(completedTasksCount);
-        } 
-      )
+        const completedTasksCount =
+          declinedTasksCount + pendingTasksCount - totalTasks;
+        setCompletedTasks(completedTasksCount);
+      })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
       });
@@ -102,33 +103,62 @@ function Dashboard() {
           <div className="w-[90%] py-2 lg:w-[23%] h-28 mx-auto mt-2 font-bold border-1 rounded-md bg-[#F4F2FF]">
             <h1 className="mt-2 px-4 text-left ">Total Task</h1>
             <h2 className="mt-2 text-left px-4 h-10 text-xl text-gray-400 font-poppins">
-              {totalTasks}
+              {totalTasks}/100
             </h2>
-
-            <div class="ml-3 px-4 w-[90%] rounded-sm h-3.5 bg-[#4BCBEB]"></div>
+            <div className="ml-3 w-[90%] bg-gray-300 rounded-sm overflow-hidden">
+              <div
+                className="bg-[#4BCBEB] "
+                style={{ width: `${totalTasks}%`, height: "19px" }}
+              ></div>
+            </div>{" "}
           </div>
 
           <div className="w-[90%]  py-2 lg:w-[23%]  mx-auto h-28 mt-2 mb-2 font-bold border-1 rounded-md bg-[#E2EFFC]">
             <h1 className="mt-2 px-4 text-left">Completed Task</h1>
             <h2 className="mt-2 text-left px-4 h-10 text-xl text-gray-500">
-              {completedTasks}
+              {completedTasks}/{totalTasks}
             </h2>
-            <div class="ml-3 px-4 w-[80%] rounded-sm h-3.5 bg-green-500"></div>
+
+            <div className="ml-3 w-[90%] bg-gray-300 rounded-sm overflow-hidden">
+              <div
+                className="bg-[#5CB85C]"
+                style={{
+                  width: `${(completedTasks / totalTasks) * 100}%`,
+                  height: "19px",
+                }}
+              ></div>
+            </div>
           </div>
 
           <div className="w-[90%]  py-2 lg:w-[23%] mx-auto mt-2 h-28 font-bold border-1 rounded-md bg-[#FBEDD2] ">
             <h1 className="mt-2 px-4 text-left">Pending Task</h1>
             <h2 className="mt-2 text-left px-4 h-10 text-xl text-gray-500">
-              {pendingTasks}
+              {pendingTasks}/{totalTasks}
             </h2>
-            <div class="ml-3 px-4 w-[50%] rounded-sm h-3.5 bg-[#F0AD4E]"></div>
+            <div className="ml-3 w-[90%] bg-gray-300 rounded-sm overflow-hidden">
+              <div
+                className="bg-[#F0AD4E]"
+                style={{
+                  width: `${(pendingTasks / totalTasks) * 100}%`,
+                  height: "19px",
+                }}
+              ></div>
+            </div>{" "}
           </div>
           <div className="w-[90%]  py-2 lg:w-[23%] mx-auto h-28 mt-2 font-bold border-1 rounded-md bg-[#E0F6F4]">
             <h1 className="mt-2 px-4 text-left">Decline Task</h1>
             <h2 className=" mt-4 lg:mt-2 text-left px-4 h-10 text-xl text-gray-500">
-              {declinedTasks}
+              {declinedTasks}/{totalTasks}
             </h2>
-            <div class="ml-3 px-4 w-[10%] rounded-sm h-3.5 bg-[#D9534F]"></div>
+            <div className="ml-3 w-[90%]  bg-gray-300 rounded-sm overflow-hidden">
+              <div
+                className="bg-[#D9534F]"
+                style={{
+                  width: `${(declinedTasks / totalTasks) * 100}%`,
+                  height: "19px",
+                }}
+              ></div>
+            </div>{" "}
           </div>
         </div>
 

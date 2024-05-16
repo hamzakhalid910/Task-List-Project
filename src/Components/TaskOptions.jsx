@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DeleteTaskModal from "./DeleteTaskModal";
 import EditTaskModal from "./EditTaskModal";
 
-function TaskOptions({ showOptions, taskId }) {
+function TaskOptions({ showOptions, setShowOptions, taskId }) {
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
 
@@ -26,15 +26,7 @@ function TaskOptions({ showOptions, taskId }) {
                 Delete
               </button>
             </li>
-            <li>
-              <button
-                onClick={() => {
-                  console.log("View clicked");
-                }}
-              >
-                View
-              </button>
-            </li>
+
             <li>
               <button
                 onClick={() => {
